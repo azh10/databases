@@ -1,0 +1,14 @@
+<h1>angular-ticker</h1>
+
+<ul ticker>
+  <li ng-repeat="item in myTickerItems" class="item-{{$index}}">
+    <b>{{item.title}}</b> - {{item.copy}}
+  </li>
+</ul>
+
+<p><small>custom timing of 3000:</small></p>
+<ul ticker timing="3000">
+  <li ng-repeat="item in myTickerItems">
+    {{item.title}}
+  </li>
+</ul>

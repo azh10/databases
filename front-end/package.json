@@ -1,0 +1,41 @@
+{
+  "name": "cipher",
+  "version": "0.0.0",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/pandera-systems/angular-1-project.git"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp dev"
+  },
+  "homepage": "http://panderasystems.com",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^4.1.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-jshint": "^2.0.1",
+    "gulp-ng-constant": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-strip-css-comments": "^1.2.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "merge-stream": "^1.0.0",
+    "run-sequence": "^1.2.1"
+  },
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-resource": "^1.6.3",
+    "angular-ui-router": "^0.4.2"
+  }
+}

@@ -1,0 +1,15 @@
+<div id="portal-view">
+  <header>
+    <div>
+      <h1>{{portal.about.name}}</h1>
+      <p>{{portal.about.description}}</p>
+    </div>
+  </header>
+  <section>
+    <div ui-view></div>
+  </section>
+  <footer>
+    <p>Backend version: {{portal.about.version}}</p>
+    <p>Frontend version: {{portal.feVersion}}</p>
+  </footer>
+</div>
