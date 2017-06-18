@@ -6,7 +6,7 @@
     $logProvider.debugEnabled(ConStore.debugInfoEnabled);
 
     $locationProvider.hashPrefix('');
-    $urlRouterProvider.otherwise('/extranet');
+    //$urlRouterProvider.otherwise('/extranet');
 
     console.log(ConStore.version);
   };

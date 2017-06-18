@@ -1,26 +1,56 @@
 
 #portal-view
+  background-color: #ffc904
+  height: 100vh
+  width: 100vw
+  display: flex
+  flex-direction: column
+
+
   header
     text-align: center
-    padding: 1em
+    height: 100px
 
     & *
       text-transform: capitalize
 
+    img
+      height: 5%
     ul
       list-style: none
       display: flex
       flex-direction: row
       justify-content: space-around
+      overflow-x: scroll
 
       li
         padding: 1em
         cursor: pointer
 
-  footer
-    position: absolute
-    bottom: 0
-    width: 100%
-    text-align: center
-    padding: 1em
 
+  section
+    padding: 1em
+    justify-content: center
+
+    div
+      overflow: scroll
+      min-height: 5vh
+      max-height: 75vh
+      background-color: white
+
+      table
+        flex-grow: 1
+        border-collapse: collapse
+        width: 100%
+
+        th, td
+          text-align: left
+          padding: 8px
+
+
+        tr:nth-child(even)
+          background-color: #f2f2f2
+
+        th
+          background-color: #4CAF50
+          color: white

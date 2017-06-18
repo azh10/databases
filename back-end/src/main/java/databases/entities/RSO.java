@@ -1,11 +1,15 @@
 package databases.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Entity // This tells Hibernate to make a table out of this class
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@Accessors(chain = true)
 public class RSO {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -15,30 +19,8 @@ public class RSO {
 
     private String email;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-    
-    
+	@ManyToOne
+	@JoinColumn(name = "admin_id")
+    private Admin admin;
 }
 

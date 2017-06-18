@@ -1,15 +1,16 @@
 <div id="portal-view">
   <header>
-    <div>
-      <h1>{{portal.about.name}}</h1>
-      <p>{{portal.about.description}}</p>
-    </div>
+    <cipher-menu>
+      <div ng-repeat="tab in portal.tabs track by $index"
+           ng-click="portal.cellClick($index)"
+           ng-class="{'selected' : portal.selectedTab == $index}">
+        <li ui-sref="{{tab.route}}">{{tab.name}}</li>
+      </div>
+    </cipher-menu>
   </header>
   <section>
-    <div ui-view></div>
+    <div ui-view>
+      <h1 style="text-align: center">Select a tab to populate.</h1>
+    </div>
   </section>
-  <footer>
-    <p>Backend version: {{portal.about.version}}</p>
-    <p>Frontend version: {{portal.feVersion}}</p>
-  </footer>
 </div>

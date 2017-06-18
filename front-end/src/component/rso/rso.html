@@ -1,0 +1,19 @@
+<div id="rso-view">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Contact Email</th>
+            <th>Admin Name</th>
+        </tr>
+        <tr>
+            <td><button style="color: dodgerblue">Request your group here</button></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="org in rso.list">
+            <td>{{org.name}}</td>
+            <td>{{org.email}}</td>
+            <td>{{org.admin.user.name}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,11 +1,18 @@
 package databases.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
+@Getter
+@Setter
+@Accessors(chain = true)
 public class University {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -13,32 +20,6 @@ public class University {
 
     private String name;
 
-    private String email;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-    
-    
+    private String location;
 }
 

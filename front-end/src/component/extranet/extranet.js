@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var ExtranetController = function ($scope,$state) {
+  var ExtranetController = function ($scope, $state) {
     var self = this;
 
     this.init = function () {
@@ -12,19 +12,20 @@
   };
 
   angular
-      .module('Cipher')
-      .config(['$stateProvider', function ($stateProvider) {
-        $stateProvider
-            .state('extranet', {
-              url: '/extranet',
-              templateUrl: 'component/extranet/extranet.html',
-              controllerAs: 'extranet',
-              controller: 'ExtranetController'
-            });
-      }])
-      .controller('ExtranetController', [
-        '$scope',
-        '$state',
-        ExtranetController
-      ]);
+    .module('Cipher')
+    .service('extranet', [])
+    .config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+        .state('extranet', {
+          url: '/extranet',
+          templateUrl: 'component/extranet/extranet.html',
+          controllerAs: 'extranet',
+          controller: 'ExtranetController'
+        });
+    }])
+    .controller('ExtranetController', [
+      '$scope',
+      '$state',
+      ExtranetController
+    ]);
 })();

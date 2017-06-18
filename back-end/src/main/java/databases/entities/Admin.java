@@ -1,44 +1,20 @@
 package databases.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Entity // This tells Hibernate to make a table out of this class
-public class Admin {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private String name;
-
-    private String email;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-    
-    
+@Entity
+@Getter
+@Setter
+@Accessors(chain = true)
+public class Admin implements Serializable {
+	@Id
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 }
 
