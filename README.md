@@ -5,6 +5,7 @@ To run the db:
 --------------
 *requirements mysql*
 `mysql.server start`
+when the backend starts up it will initialize the database with the data given in data.sql.
 
 To run the back-end server:
 ---------------------------
@@ -13,5 +14,5 @@ To run the back-end server:
 
 To run the front-end:
 ---------------------
-*requirements node, bower, and gulp.
+*requirements node, bower, and gulp.*
 `cd front-end` and run `gulp`
