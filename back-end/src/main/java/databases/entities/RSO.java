@@ -22,5 +22,7 @@ public class RSO {
 	@ManyToOne
 	@JoinColumn(name = "admin_id")
     private Admin admin;
+
+	private String type;
 }
 

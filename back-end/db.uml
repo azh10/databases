@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>0bd6937c-b9d9-4060-b8a7-99036900c428</OriginalElement>
+  <nodes>
+    <node x="196.0" y="168.0">0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.admin</node>
+    <node x="63.0" y="482.0">0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.event</node>
+    <node x="166.0" y="292.0">0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.rso</node>
+    <node x="0.0" y="314.0">0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.university</node>
+    <node x="176.0" y="0.0">0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.user</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.event" target="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.rso">
+      <point x="51.5" y="-81.0" />
+      <point x="217.5" y="457.0" />
+      <point x="259.0" y="457.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.event" target="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.university">
+      <point x="-51.5" y="-81.0" />
+      <point x="114.5" y="457.0" />
+      <point x="73.0" y="457.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.admin" target="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.user">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.rso" target="0bd6937c-b9d9-4060-b8a7-99036900c428.TABLE:db_example.admin">
+      <point x="0.0" y="-70.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="351.0" y="322.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

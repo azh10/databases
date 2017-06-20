@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -19,6 +17,18 @@ public class Event {
     private Integer id;
 
     private String title;
+
+    private String location;
+
+    private Timestamp date;
+
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+    private University university;
+
+    @ManyToOne
+    @JoinColumn(name = "rso_id")
+    private RSO rso;
 
 
 }

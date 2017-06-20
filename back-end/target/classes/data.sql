@@ -1,5 +1,6 @@
 
--- insert ignore into db_example.
+insert ignore into db_example.university (location, name) value
+  ("Orlando","UCF");
 
 insert ignore into db_example.user (id, name, email) value
   (1,"Joe","joe@example.com");
