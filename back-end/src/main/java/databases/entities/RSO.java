@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,5 +25,14 @@ public class RSO {
     private Admin admin;
 
 	private String type;
+
+	// rso member list
+    @ManyToMany
+    @JoinTable(
+            name = "rso_users",
+            joinColumns = @JoinColumn(name = "rso_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<User> users;
+
 }
 

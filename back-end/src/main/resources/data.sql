@@ -33,6 +33,8 @@ insert IGNORE into db_example.rso (name, email, admin_id) values
   ,("semper,","viverra@lorem.edu",1),("odio vel est","turpis.In.condimentum@blanditatnisi.edu",1),("neque vitae semper","natoque@vel.ca",1),("Cum","vitae.mauris.sit@lectusa.co.uk",1),("ligula. Donec luctus","velit.egestas.lacinia@sollicitudincommodoipsum.org",1),("vel quam","ornare@idliberoDonec.org",1),("arcu. Vestibulum ut","pede.nec@eratnonummyultricies.co.uk",1),("erat volutpat. Nulla","quis.massa.Mauris@elementum.co.uk",1),("ante ipsum primis","dis.parturient@commodotincidunt.net",1),("nascetur ridiculus","leo@elitfermentum.co.uk",1);
 
 
+insert IGNORE into db_example.rso_users (rso_id, user_id) values
+  (1,1),(1,2),(1,3);
 
 
 
