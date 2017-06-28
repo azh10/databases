@@ -8,6 +8,11 @@
     $locationProvider.hashPrefix('');
     //$urlRouterProvider.otherwise('/extranet');
 
+    $urlRouterProvider
+      .when('/', function ($state) {
+        $state.go('portal');
+      });
+
     console.log(ConStore.version);
   };
 

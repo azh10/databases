@@ -2,6 +2,7 @@
   background-color: white
   overflow-x: hidden
   border-radius: 15px
+  width: 100%
   //border: 2px solid #73AD21
 
   .selected
@@ -11,10 +12,14 @@
   ul
     list-style: none
     display: flex
-    flex-direction: row
-    align-items: center
     overflow-x: scroll
+    justify-content: space-between
+    padding-right: 3em
 
     li
+      flex-grow: 1
       padding: 1em
       cursor: pointer
+
+      &.last
+        background: black

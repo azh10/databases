@@ -36,10 +36,10 @@
           name: 'Universities',
           template: 'component/university/university.html'
         },{
-          url: '/template',
-          route: 'portal.template',
+          url: '/events',
+          route: 'portal.events',
           name: 'Events',
-          template: 'component/template/template.html'
+          template: 'component/events/events.html'
         },{
           url: '/template',
           route: 'portal.template',

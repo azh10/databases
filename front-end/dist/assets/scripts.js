@@ -37536,6 +37536,11 @@ angular.module('ngAnimate', [], function initAngularHelpers() {
     $locationProvider.hashPrefix('');
     //$urlRouterProvider.otherwise('/extranet');
 
+    $urlRouterProvider
+      .when('/', function ($state) {
+        $state.go('portal');
+      });
+
     console.log(ConStore.version);
   };
 
@@ -42440,38 +42445,19 @@ angular.module('ui.router.state')
     ]);
 })();
 
-(function () {
-  'use strict';
+(function() {
+'use strict';
 
-  var ExtranetController = function ($scope, $state) {
-    var self = this;
+angular.module("config", [])
 
-    this.init = function () {
-      $scope.msg = 'Extranet works!';
-    };
+.constant("ConStore", {
+	"version": "v0.0.0",
+	"showVersion": true,
+	"baseUrl": "http://localhost:9019",
+	"apiServer": "http://127.0.0.1:8081"
+})
 
-    this.init();
-  };
-
-  angular
-    .module('Cipher')
-    .service('extranet', [])
-    .config(['$stateProvider', function ($stateProvider) {
-      $stateProvider
-        .state('extranet', {
-          url: '/extranet',
-          templateUrl: 'component/extranet/extranet.html',
-          controllerAs: 'extranet',
-          controller: 'ExtranetController'
-        });
-    }])
-    .controller('ExtranetController', [
-      '$scope',
-      '$state',
-      ExtranetController
-    ]);
-})();
-
+;})();
 /**
  * @license AngularJS v1.6.4
  * (c) 2010-2017 Google, Inc. http://angularjs.org
@@ -43331,19 +43317,88 @@ angular.module('ngResource', ['ng']).
 
 })(window, window.angular);
 
-(function() {
-'use strict';
+(function () {
+  'use strict';
 
-angular.module("config", [])
+  var EventsController = function (EventsService, ConStore) {
+    var self = this;
 
-.constant("ConStore", {
-	"version": "v0.0.0",
-	"showVersion": true,
-	"baseUrl": "http://localhost:9019",
-	"apiServer": "http://192.168.10.68:8081"
-})
+    this.getAll = function () {
+      EventsService.getAll().then(function (response) {
+        console.log(response);
+        self.list = response;
+      });
+    };
 
-;})();
+    this.init = function () {
+      this.getAll();
+    };
+
+    this.init();
+  };
+
+  var EventsService = function (WebService) {
+    this.getAll = function () {
+      return WebService.doGetAll({
+        url: 'event'
+      });
+    };
+  };
+
+  angular
+    .module('Cipher')
+    .service('EventsService', [
+      'WebService',
+      EventsService
+    ])
+    .config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+        .state('portal.events', {
+          url: '',
+          templateUrl: 'component/events/events.html',
+          controllerAs: 'events',
+          controller: 'EventsController'
+        });
+    }])
+    .controller('EventsController', [
+      'EventsService',
+      'ConStore',
+      EventsController
+    ]);
+})();
+
+(function () {
+  'use strict';
+
+  var ExtranetController = function ($scope, $state) {
+    var self = this;
+
+    this.init = function () {
+      $scope.msg = 'Extranet works!';
+    };
+
+    this.init();
+  };
+
+  angular
+    .module('Cipher')
+    .service('extranet', [])
+    .config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+        .state('extranet', {
+          url: '/extranet',
+          templateUrl: 'component/extranet/extranet.html',
+          controllerAs: 'extranet',
+          controller: 'ExtranetController'
+        });
+    }])
+    .controller('ExtranetController', [
+      '$scope',
+      '$state',
+      ExtranetController
+    ]);
+})();
+
 (function () {
   'use strict';
 
@@ -43413,10 +43468,10 @@ angular.module("config", [])
           name: 'Universities',
           template: 'component/university/university.html'
         },{
-          url: '/template',
-          route: 'portal.template',
+          url: '/events',
+          route: 'portal.events',
           name: 'Events',
-          template: 'component/template/template.html'
+          template: 'component/events/events.html'
         },{
           url: '/template',
           route: 'portal.template',
