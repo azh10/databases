@@ -37526,38 +37526,6 @@ angular.module('ngAnimate', [], function initAngularHelpers() {
 
 })(window, window.angular);
 
-(function () {
-  'use strict';
-
-  var AppController = function ($logProvider, $locationProvider, $urlRouterProvider, ConStore) {
-
-    $logProvider.debugEnabled(ConStore.debugInfoEnabled);
-
-    $locationProvider.hashPrefix('');
-    //$urlRouterProvider.otherwise('/extranet');
-
-    $urlRouterProvider
-      .when('/', function ($state) {
-        $state.go('portal');
-      });
-
-    console.log(ConStore.version);
-  };
-
-  angular.module('Cipher', [
-    'ui.router',
-    'ngResource',
-    'ngAnimate',
-    'config'
-  ]).config([
-    '$logProvider',
-    '$locationProvider',
-    '$urlRouterProvider',
-    'ConStore',
-    AppController
-  ]);
-})();
-
 /**
  * State-based routing for AngularJS
  * @version v0.4.2
@@ -42245,6 +42213,38 @@ angular.module('ui.router.state')
 (function () {
   'use strict';
 
+  var AppController = function ($logProvider, $locationProvider, $urlRouterProvider, ConStore) {
+
+    $logProvider.debugEnabled(ConStore.debugInfoEnabled);
+
+    $locationProvider.hashPrefix('');
+    //$urlRouterProvider.otherwise('/extranet');
+
+    $urlRouterProvider
+      .when('/', function ($state) {
+        $state.go('portal');
+      });
+
+    console.log(ConStore.version);
+  };
+
+  angular.module('Cipher', [
+    'ui.router',
+    'ngResource',
+    'ngAnimate',
+    'config'
+  ]).config([
+    '$logProvider',
+    '$locationProvider',
+    '$urlRouterProvider',
+    'ConStore',
+    AppController
+  ]);
+})();
+
+(function () {
+  'use strict';
+
   var webService = function ($resource, $rootScope, ConStore, $q) {
     var APIManager={
       Req:      function(method, headers, url, data) {
@@ -43320,12 +43320,11 @@ angular.module('ngResource', ['ng']).
 (function () {
   'use strict';
 
-  var EventsController = function (EventsService, ConStore) {
+  var EventsController = function (EventsService, $stateParams) {
     var self = this;
 
     this.getAll = function () {
-      EventsService.getAll().then(function (response) {
-        console.log(response);
+      EventsService.getAll($stateParams).then(function (response) {
         self.list = response;
       });
     };
@@ -43338,10 +43337,15 @@ angular.module('ngResource', ['ng']).
   };
 
   var EventsService = function (WebService) {
-    this.getAll = function () {
-      return WebService.doGetAll({
-        url: 'event'
-      });
+    this.getAll = function (params) {
+      if (params.university && params.university.length)
+        return WebService.doGetAll({url: 'event/university/'+ params.university});
+
+      if (params.rso && params.rso.length)
+        return WebService.doGetAll({url: 'event/rso/'+ params.rso});
+
+      return WebService.doGetAll({url: 'event'});
+
     };
   };
 
@@ -43354,7 +43358,7 @@ angular.module('ngResource', ['ng']).
     .config(['$stateProvider', function ($stateProvider) {
       $stateProvider
         .state('portal.events', {
-          url: '',
+          url: '/:university?rso',
           templateUrl: 'component/events/events.html',
           controllerAs: 'events',
           controller: 'EventsController'
@@ -43362,7 +43366,7 @@ angular.module('ngResource', ['ng']).
     }])
     .controller('EventsController', [
       'EventsService',
-      'ConStore',
+      '$stateParams',
       EventsController
     ]);
 })();
@@ -43469,7 +43473,7 @@ angular.module('ngResource', ['ng']).
           template: 'component/university/university.html'
         },{
           url: '/events',
-          route: 'portal.events',
+          route: 'portal.events({university: undefined, rso: undefined})',
           name: 'Events',
           template: 'component/events/events.html'
         },{

@@ -1,12 +1,11 @@
 (function () {
   'use strict';
 
-  var EventsController = function (EventsService, ConStore) {
+  var EventsController = function (EventsService, $stateParams) {
     var self = this;
 
     this.getAll = function () {
-      EventsService.getAll().then(function (response) {
-        console.log(response);
+      EventsService.getAll($stateParams).then(function (response) {
         self.list = response;
       });
     };
@@ -19,10 +18,15 @@
   };
 
   var EventsService = function (WebService) {
-    this.getAll = function () {
-      return WebService.doGetAll({
-        url: 'event'
-      });
+    this.getAll = function (params) {
+      if (params.university && params.university.length)
+        return WebService.doGetAll({url: 'event/university/'+ params.university});
+
+      if (params.rso && params.rso.length)
+        return WebService.doGetAll({url: 'event/rso/'+ params.rso});
+
+      return WebService.doGetAll({url: 'event'});
+
     };
   };
 
@@ -35,7 +39,7 @@
     .config(['$stateProvider', function ($stateProvider) {
       $stateProvider
         .state('portal.events', {
-          url: '',
+          url: '/:university?rso',
           templateUrl: 'component/events/events.html',
           controllerAs: 'events',
           controller: 'EventsController'
@@ -43,7 +47,7 @@
     }])
     .controller('EventsController', [
       'EventsService',
-      'ConStore',
+      '$stateParams',
       EventsController
     ]);
 })();

@@ -176,6 +176,27 @@ td,
 th {
   padding: 0; }
 
+.cipher-menu {
+  background-color: white;
+  overflow-x: hidden;
+  border-radius: 15px;
+  width: 100%; }
+  .cipher-menu .selected {
+    border-bottom: solid dodgerblue;
+    font-weight: 700; }
+  .cipher-menu ul {
+    list-style: none;
+    display: flex;
+    overflow-x: scroll;
+    justify-content: space-between;
+    padding-right: 3em; }
+    .cipher-menu ul li {
+      flex-grow: 1;
+      padding: 1em;
+      cursor: pointer; }
+      .cipher-menu ul li.last {
+        background: black; }
+
 
 
 
@@ -212,7 +233,6 @@ th {
         #portal-view section .section table th {
           background-color: #4CAF50;
           color: white; }
-
 
 #template-view header {
   text-align: center;

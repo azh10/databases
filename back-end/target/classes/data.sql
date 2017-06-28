@@ -4,9 +4,6 @@ insert ignore into db_example.university (location, name) value
  ,('Orlando', 'Valencia')
  ,('Gainesville', 'UF');
 
-insert ignore into db_example.university (location, name) value
-  ("Orlando","UCF");
-
 insert ignore into db_example.user (id, name, email) value
   (1,"Joe","joe@example.com");
 
@@ -41,15 +38,13 @@ insert IGNORE into db_example.rso (name, email, admin_id) values
 insert IGNORE into db_example.rso_users (rso_id, user_id) values
   (1,1),(1,2),(1,3);
 
-INSERT IGNORE INTO db_example.event (date, location, title, rso_id) VALUES
-  (DATE ('2017-06-23'), 'Orlando', 'Party', 1),
-  (DATE ('2017-06-23'), 'Orlando', 'Studying', 2),
-  (DATE ('2017-06-23'), 'Orlando', 'Dinner', 3);
-
-INSERT IGNORE INTO db_example.event (date, location, title, university_id) VALUES
-  (DATE ('2017-06-23'), 'Orlando', 'Football Game', 1),
-  (DATE ('2017-06-23'), 'Orlando', 'Hackaton', 2),
-  (DATE ('2017-06-23'), 'Orlando', 'Rally', 3)
+INSERT IGNORE INTO db_example.event (date, location, title, university_id, rso_id) VALUES
+  (DATE ('2017-06-23'), 'Orlando', 'Party', null, 1),
+  (DATE ('2017-06-23'), 'Orlando', 'Studying', null, 2),
+  (DATE ('2017-06-23'), 'Orlando', 'Dinner', null, 3),
+  (DATE ('2017-06-23'), 'Orlando', 'Football Game', 1, null),
+  (DATE ('2017-06-23'), 'Orlando', 'Hackaton', 2, null),
+  (DATE ('2017-06-23'), 'Orlando', 'Rally', 3, null)
 
 
 

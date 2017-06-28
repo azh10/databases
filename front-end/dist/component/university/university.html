@@ -3,7 +3,8 @@
         <tr>
             <th>University</th>
         </tr>
-        <tr ng-repeat="org in university.list">
+        <tr ng-repeat="org in university.list"
+            ui-sref="portal.events({university: {{org.id}}, rso: undefined})">
             <td>{{org.name}}</td>
         </tr>
     </table>

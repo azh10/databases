@@ -10,7 +10,8 @@
             <td></td>
             <td></td>
         </tr>
-        <tr ng-repeat="org in rso.list">
+        <tr ng-repeat="org in rso.list"
+            ui-sref="portal.events({university: undefined, rso: {{org.id}}})">
             <td>{{org.name}}</td>
             <td>{{org.email}}</td>
             <td>{{org.admin.user.name}}</td>

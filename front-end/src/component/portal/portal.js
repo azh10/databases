@@ -37,7 +37,7 @@
           template: 'component/university/university.html'
         },{
           url: '/events',
-          route: 'portal.events',
+          route: 'portal.events({university: undefined, rso: undefined})',
           name: 'Events',
           template: 'component/events/events.html'
         },{
