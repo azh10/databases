@@ -162,3 +162,5 @@ nb-configuration.xml
 #Hibernate Persistence
 src/main/resources/templates/hib.xml
 
+#Dist files
+dist/
