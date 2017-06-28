@@ -1,5 +1,6 @@
 package databases.controllers;
 
+import databases.entities.RSO;
 import databases.entities.University;
 import databases.repositories.EventRepository;
 import databases.repositories.UniversityRepository;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
 
 import static databases.util.ResponseUtil.respond;
 
@@ -33,10 +36,13 @@ public class EventController {
     }
 
     @GetMapping("/university/{university}")
-    public HttpEntity<?> byUniveristy (@PathVariable("university") Integer key) {
-        return respond(eventRepository.findByUniversity(
-                universityRepository.findOne(key)
-        ));
+    public HttpEntity<?> byUniversity (@PathVariable("university") University university) {
+        return respond((university!=null) ? eventRepository.findByUniversity(university) : new ArrayList<>());
+    }
+
+    @GetMapping("/rso/{rso}")
+    public HttpEntity<?> byRso (@PathVariable("rso") RSO rso) {
+        return respond((rso!=null) ? eventRepository.findByRso(rso) : new ArrayList<>());
     }
 
     @PostMapping
