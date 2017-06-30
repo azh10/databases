@@ -5,7 +5,10 @@ Repository for COP4710 final project.
 
 To run the db:
 --------------
-*requirements mysql, and on install of mysql must create an admin level user name: spring with password: thepassword (defined in application.properties)*
+*requirements: mysql*
+
+On install of mysql must create an admin level user name: spring with password: thepassword (defined in application.properties)*
+
 `mysql.server start`
 when the backend starts up it will initialize the database with the data given in data.sql.
 
