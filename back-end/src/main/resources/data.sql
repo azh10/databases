@@ -23,7 +23,9 @@ insert IGNORE into db_example.admin (user_id) VALUES
   (1), (2);
 
 insert IGNORE into db_example.rso (name, email, admin_id) values
-  ("4EVER KNIGHTS","knights4ever@ucf.edu",1), ("Active Minds","minds@ucf.edu",2), ("Actuarial Science Club","asc@ucf.edu",2);
+  ("4EVER KNIGHTS","knights4ever@ucf.edu",1), ("Active Minds","minds@ucf.edu",2), ("Actuarial Science Club","asc@ucf.edu",2),
+  ("Advertising Club","advertising@ucf.edu",2),("Advocates for World Health","advocatehealth@ucf.edu",1),
+  ("American Red Cross Club","redcross@help.org",1);
 
 insert IGNORE into db_example.rso_users (rso_id, user_id) values
   (1,1),(1,2),(1,3);
