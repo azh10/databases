@@ -30,4 +30,3 @@ public class University {
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<User> users;
 }
-
