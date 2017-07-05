@@ -20,6 +20,8 @@ public class University {
 
     private String location;
 
+    private String about;
+
     // university member list
     @ManyToMany
     @JoinTable(
