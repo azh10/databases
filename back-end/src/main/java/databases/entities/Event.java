@@ -21,6 +21,8 @@ public class Event {
 
     private String location;
 
+    private String about;
+
     private Timestamp date;
 
     // to know if the event is university or rso based use only one and the other should be null
@@ -42,4 +44,3 @@ public class Event {
     private List<User> users;
 
 }
-

@@ -21,5 +21,6 @@ public class User {
     private String email;
 
     private String password;
-}
 
+    private Integer uni_id;
+}
