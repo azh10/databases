@@ -45,11 +45,6 @@
           route: 'portal.template',
           name: 'Settings',
           template: 'component/template/template.html'
-        },{
-          url: '/template',
-          route: 'portal.template',
-          name: 'template',
-          template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
     };
