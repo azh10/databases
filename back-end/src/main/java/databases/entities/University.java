@@ -25,9 +25,9 @@ public class University {
     // university member list
     @ManyToMany
     @JoinTable(
-            name = "university_users",
-            joinColumns = @JoinColumn(name = "university_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+        name = "university_users",
+        joinColumns = @JoinColumn(name = "university_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "uni_id"))
     private Set<User> users;
 
     public University addUser (User user) {
@@ -40,4 +40,3 @@ public class University {
         return this;
     }
 }
-

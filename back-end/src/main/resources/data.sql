@@ -35,16 +35,13 @@ INSERT IGNORE INTO db_example.event (date, location, title, university_id, rso_i
 
 
 insert ignore into db_example.event_users (event_id, user_id) values
-  (1,2), (2,3);
+  (1,2), (2,3), (6,1), (8,5), (65,4);
 
 insert ignore into db_example.rso_users (rso_id, user_id) values
   (1,2), (2,3), (1,21), (2,31), (1,22), (2,32);
 
-insert ignore into db_example.university_users (university_id, user_id) values
-  (1,102), (2,103), (1,112), (2,113), (1,112), (2,113);
-
-
-
+-- insert ignore into db_example.university_users (university_id, user_id) values
+  -- (1,102), (2,103), (1,112), (2,113), (1,112), (2,113);
 
 
 -- delete a, u, r from admin a, user u, rso r;

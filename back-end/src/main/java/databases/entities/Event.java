@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,6 +20,8 @@ public class Event {
     private String title;
 
     private String location;
+
+    private String about;
 
     private Timestamp date;
 
@@ -39,7 +41,6 @@ public class Event {
             name = "event_users",
             joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<User> users;
+    private Set<User> users;
 
 }
-
