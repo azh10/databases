@@ -25,6 +25,8 @@ public class Event {
 
     private Timestamp date;
 
+    private Boolean type;
+
     // to know if the event is university or rso based use only one and the other should be null
     @ManyToOne
     @JoinColumn(name = "university_id")
