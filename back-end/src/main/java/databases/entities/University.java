@@ -22,11 +22,13 @@ public class University {
 
     private String about;
 
+    private String image_url;
+
     // university member list
     @ManyToMany
     @JoinTable(
             name = "university_users",
             joinColumns = @JoinColumn(name = "university_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "uni_id"))
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<User> users;
 }
