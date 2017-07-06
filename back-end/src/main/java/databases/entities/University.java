@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,6 +28,16 @@ public class University {
             name = "university_users",
             joinColumns = @JoinColumn(name = "university_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<User> users;
+    private Set<User> users;
+
+    public University addUser (User user) {
+        this.users.add(user);
+        return this;
+    }
+
+    public University removeUser (User user) {
+        this.users.remove(user);
+        return this;
+    }
 }
 
