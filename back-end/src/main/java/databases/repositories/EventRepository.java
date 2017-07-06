@@ -3,17 +3,15 @@ package databases.repositories;
 import databases.entities.Event;
 import databases.entities.RSO;
 import databases.entities.University;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Set;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
 public interface EventRepository extends CrudRepository<Event, Integer> {
 
-    List<Event> findByUniversity(University university);
-    List<Event> findByRso(RSO rso);
+    Set<Event> findByUniversity(University university);
+    Set<Event> findByRso(RSO rso);
 }

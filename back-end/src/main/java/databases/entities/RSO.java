@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -32,7 +32,16 @@ public class RSO {
             name = "rso_users",
             joinColumns = @JoinColumn(name = "rso_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<User> users;
+    private Set<User> users;
 
+    public RSO addUser (User user) {
+        this.users.add(user);
+        return this;
+    }
+
+    public RSO removeUser (User user) {
+        this.users.remove(user);
+        return this;
+    }
 }
 
