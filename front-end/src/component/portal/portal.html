@@ -1,3 +1,54 @@
+<div id="modal-view">
+  <div id="cover" ng-if="portal.showModal" ng-click="portal.showModal = false" ng-switch="portal.showModal">
+    <div id="modal" ng-click="$event.stopPropagation()" ng-switch-when="user">
+      <div id="modal-header">
+        <div id="modal-title">
+          <span>Create RSO</span>
+        </div>
+        <i class="fa fa-times" id="modal-dismiss" ng-click="portal.showModal = false"
+           aria-hidden="true"></i>
+      </div>
+      <div id="modal-content">
+        <div class="form-group">
+          <span class="error" ng-if="portal.newRSO.nameError">Required</span>
+          <input id="rso-name" class="form-control title" type="text" placeholder="Title" ng-model="portal.newRSO.name">
+          <br/>
+        </div>
+
+        <div>
+          <span class="error" ng-if="portal.newRSO.uniError">Required</span>
+          <select id="new-rso">
+            <option selected disabled hidden>University</option>
+            <option ng-repeat="x in portal.universities">{{x.name}}</option>
+          </select>
+        </div>
+
+        <div>
+          <input ng-model="portal.newmember" style="width: 80%">
+          <button ng-click='portal.add()'>Add</button>
+          <br/>
+          <b>Items Added Below</b>
+          <div ng-repeat='member in portal.members'>
+            <input ng-model='member' id='member-{{$index}}' class='input-{{$index}}' style="width: 80%">
+            <button ng-click='portal.del($index)'>DEL</button>
+          </div>
+        </div>
+        <div class="bottom">
+           <div class="bottom-buttons">
+            <span>
+              <button class="btn btn-success"
+                      ng-click="portal.createRSO();console.log('not implemented')"
+                      ng-disabled="!portal.newRSO.name || !portal.members > 4">
+                Create<i ng-show="portal.newRSO.isAdding" class="fa fa-spinner fa-pulse fa-fw"></i>
+              </button>
+            </span>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="portal-view">
   <header>
     <cipher-menu>
@@ -9,6 +60,7 @@
     </cipher-menu>
   </header>
   <section>
+    <button ng-click="portal.showModal = 'user'"> clickme {{portal.showModal}}</button>
     <div class="section" ui-view>
       <h1 style="text-align: center">Select a tab to populate.</h1>
     </div>

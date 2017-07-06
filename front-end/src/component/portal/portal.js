@@ -16,8 +16,39 @@
       self.selectedTab = index;
     };
 
+    self.universities = [ {name:"test1", id:1}, {name:"test2", id:2}, {name:"test3", id:3} ];
+
+    self.createRSO = function () {
+      var index = document.getElementById("new-rso").selectedIndex;
+      if (index) {
+        self.newRSO.uniError = false;
+        console.log("do post on ",self.newRSO,self.universities[document.getElementById("new-rso").selectedIndex - 1].id);
+      } else {
+        self.newRSO.uniError = true;
+      }
+    };
+
+    self.members = [];
+    this.add = function(){
+      var parts = self.newmember.split('@');
+      if (parts[1] === undefined) return;
+
+      if (!self.memberDomain)
+        self.memberDomain = parts[1];
+      if (parts[1] === self.memberDomain) {
+        self.members.push(self.newmember);
+        self.newmember = "";
+      }
+    };
+    this.del = function(i){
+      self.members.splice(i,1);
+      if (!self.members.length)
+        self.memberDomain = undefined;
+    };
+
     this.init = function () {
-      self.getAbout();
+      self.showModal = "user";
+      //self.getAbout();
 
       self.tabs = [
         {
@@ -58,6 +89,12 @@
         url: 'about'
       });
     };
+
+    this.createRSO = function (rso, university) {
+      return WebService.doPost({
+        url: 'rso'
+      })
+    }
   };
 
   angular

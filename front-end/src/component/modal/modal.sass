@@ -1,0 +1,112 @@
+#modal-view
+  -webkit-user-select: none
+  -moz-user-select: -moz-none
+  -ms-user-select: none
+  user-select: none
+  cursor: default
+
+  #cover
+    position: fixed
+    z-index: 1000
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background-color: rgba(0, 0, 0, .5)
+    display: flex
+    justify-content: center
+    align-items: center
+
+    &.ng-enter, &.ng-leave.ng-leave-active
+      transition: 0.15s linear all
+      opacity: 0
+      #modal
+        transition: 0.15s linear all
+        transform: scale(0.7)
+
+    &.ng-enter.ng-enter-active, &.ng-leave
+      transition: 0.1s linear all
+      opacity: 1
+      #modal
+        transition: 0.1s linear all
+        transform: scale(1)
+
+  #modal
+    position: relative
+    display: inline-flex
+    flex-direction: column
+    background-color: white
+    max-width: 100vw
+    max-height: 100vh
+    overflow: hidden
+
+    @media screen and (min-width: 30vw)
+      border: 1px solid darkgrey
+      -webkit-box-shadow: -5px 10px 20px 0px rgba(0, 0, 0, 0.5)
+      -moz-box-shadow: -5px 10px 20px 0px rgba(0, 0, 0, 0.5)
+      box-shadow: -5px 10px 20px 0px rgba(0, 0, 0, 0.5)
+      border-radius: 10px
+      margin: 0 5em
+
+    @media screen and (max-width: 30vw)
+      width: 100vw
+      height: 100vh
+
+    #modal-header
+      background-color: darkblue
+      color: white
+      padding: 5px
+      text-align: center
+      font-size: 15px
+      position: relative
+      margin: -1px
+
+      @media screen and (min-width: 30vw)
+        border-radius: 10px 10px 0 0
+
+      #modal-title
+        margin: 0 20px
+
+      #modal-dismiss
+        position: absolute
+        color: white
+        top: 50%
+        transform: translateY(-50%)
+        right: 0
+        padding: 10px
+        cursor: pointer
+
+
+    #modal-content
+      padding: 1em
+      overflow: auto
+      min-width: 40vw
+
+      div
+        padding-bottom: .5em
+
+        .error
+          color: red
+
+        .bottom-buttons
+          display: flex
+          justify-content: flex-end
+
+          button
+            border-radius: 5px
+            padding: 0.5em
+            color: #fff
+            background-color: #5cb85c
+            border-color: #4cae4c
+
+        input
+          background-color: ghostwhite
+          border-radius: 5px
+          padding: 0.5em
+          font-size: 1.25em
+          width: calc(100% - 1em)
+
+        select
+          height: 3em
+          width: 100%
+

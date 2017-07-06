@@ -1,0 +1,18 @@
+<div id="modal-view">
+
+  <div id="cover" ng-if="modal.modal" ng-click="modal.modalClose($event)">
+    <div id="modal" ng-click="$event.stopPropagation()">
+      <div id="modal-header" ng-if="modal.showHeader">
+        <div id="modal-title">
+          <span class="sr-only">{{modal.header}}</span>
+          {{modal.header}}
+        </div>
+        <i class="fa fa-times" id="modal-dismiss" ng-click="modal.modalClose($event)" aria-hidden="true"></i>
+      </div>
+      <div id="modal-content">
+        <ng-include src="modal.content"></ng-include>
+      </div>
+    </div>
+  </div>
+
+</div>
