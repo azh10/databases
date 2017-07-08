@@ -12,7 +12,7 @@
   };
 
   angular
-      .module('Cipher')
+      .module('Databases')
       .service('intranet', [])
       .config(['$stateProvider', function ($stateProvider) {
         $stateProvider

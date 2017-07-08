@@ -6,7 +6,7 @@
   };
 
   angular
-      .module('Cipher')
+      .module('Databases')
       .service('ModalService', [
         'WebService',
         'ApiService',

@@ -16,7 +16,7 @@
     console.log(ConStore.version);
   };
 
-  angular.module('Cipher', [
+  angular.module('Databases', [
     'ui.router',
     'ngResource',
     'ngAnimate',

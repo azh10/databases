@@ -24,20 +24,26 @@
         </div>
 
         <div>
-          <input ng-model="portal.newmember" style="width: 80%">
+          <input ng-if="portal.members.length" ng-model="portal.newmember" style="width: 80%" placeholder="Member email address">
+          <input ng-if="!portal.members.length" ng-model="portal.newmember" style="width: 80%" placeholder="Admin email address">
           <button ng-click='portal.add()'>Add</button>
           <br/>
-          <b>Items Added Below</b>
-          <div ng-repeat='member in portal.members'>
-            <input ng-model='member' id='member-{{$index}}' class='input-{{$index}}' style="width: 80%">
-            <button ng-click='portal.del($index)'>DEL</button>
-          </div>
+
+          <table>
+            <thead ng-if="portal.members.length">
+              <tr><th>Added members</th><th></th></tr>
+            </thead>
+            <tr ng-repeat='member in portal.members'>
+              <td> {{member}} </td>
+              <td><button ng-click='portal.del($index)'>DEL</button></td>
+            </tr>
+          </table>
         </div>
         <div class="bottom">
            <div class="bottom-buttons">
             <span>
               <button class="btn btn-success"
-                      ng-click="portal.createRSO();console.log('not implemented')"
+                      ng-click="portal.createRSO()"
                       ng-disabled="!portal.newRSO.name || !portal.members > 4">
                 Create<i ng-show="portal.newRSO.isAdding" class="fa fa-spinner fa-pulse fa-fw"></i>
               </button>
@@ -60,7 +66,6 @@
     </cipher-menu>
   </header>
   <section>
-    <button ng-click="portal.showModal = 'user'"> clickme {{portal.showModal}}</button>
     <div class="section" ui-view>
       <h1 style="text-align: center">Select a tab to populate.</h1>
     </div>

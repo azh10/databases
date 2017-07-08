@@ -52,7 +52,7 @@
   };
 
   angular
-    .module('Cipher')
+    .module('Databases')
     .service('TemplateService', [
       'WebService',
       TemplateService

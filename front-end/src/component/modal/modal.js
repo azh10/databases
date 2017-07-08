@@ -43,7 +43,7 @@
   };
 
   angular
-      .module('Cipher')
+      .module('Databases')
       .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
             .state('modal', {

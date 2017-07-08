@@ -19,10 +19,10 @@
     self.universities = [ {name:"test1", id:1}, {name:"test2", id:2}, {name:"test3", id:3} ];
 
     self.createRSO = function () {
-      var index = document.getElementById("new-rso").selectedIndex;
-      if (index) {
-        self.newRSO.uniError = false;
-        console.log("do post on ",self.newRSO,self.universities[document.getElementById("new-rso").selectedIndex - 1].id);
+      var university = document.getElementById("new-rso").selectedIndex;
+      if (university && self.members.length > 4) {
+        delete self.newRSO.uniError;
+        PortalService.createRSO(self.newRSO.name, university, self.members);
       } else {
         self.newRSO.uniError = true;
       }
@@ -47,7 +47,6 @@
     };
 
     this.init = function () {
-      self.showModal = "user";
       //self.getAbout();
 
       self.tabs = [
@@ -90,15 +89,20 @@
       });
     };
 
-    this.createRSO = function (rso, university) {
+    this.createRSO = function (name, university, emails) {
       return WebService.doPost({
-        url: 'rso'
-      })
+        url: 'rso',
+        params: {
+          name: name,
+          university: university,
+          emails: emails
+        }
+      });
     }
   };
 
   angular
-    .module('Cipher')
+    .module('Databases')
     .service('PortalService', [
       'WebService',
       PortalService

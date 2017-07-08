@@ -47,7 +47,7 @@ public class UserController {
             @RequestParam(name = "password") String password,
             @RequestParam(name = "university") Optional<University> university,
             @RequestParam(name = "rso") Optional<RSO> rso
-            ) {
+    ) {
 
         if (name == null || email == null || password == null)
             return respond(HttpStatus.BAD_REQUEST);

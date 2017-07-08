@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -35,12 +35,15 @@ public class RSO {
     private Set<User> users;
 
     public RSO addUser (User user) {
+        if (this.users == null)
+            this.users = new HashSet<>();
         this.users.add(user);
         return this;
     }
 
     public RSO removeUser (User user) {
-        this.users.remove(user);
+        if (this.users != null)
+            this.users.remove(user);
         return this;
     }
 }

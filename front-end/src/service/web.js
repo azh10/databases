@@ -191,7 +191,7 @@
   };
 
   angular
-    .module("Cipher")
+    .module("Databases")
     .factory("WebService", [
       '$resource',
       '$rootScope',

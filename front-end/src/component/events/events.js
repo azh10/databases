@@ -31,7 +31,7 @@
   };
 
   angular
-    .module('Cipher')
+    .module('Databases')
     .service('EventsService', [
       'WebService',
       EventsService

@@ -26,7 +26,7 @@
   };
 
   angular
-    .module('Cipher')
+    .module('Databases')
     .service('UsersService', [
       'WebService',
       UsersService

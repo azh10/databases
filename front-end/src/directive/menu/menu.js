@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var CipherMenu = function () {
+  var DatabasesMenu = function () {
     return {
       templateUrl: 'directive/menu/menu.html',
       restrict: 'E',
@@ -20,6 +20,6 @@
   };
 
   angular
-    .module('Cipher')
-    .directive('cipherMenu', CipherMenu);
+    .module('Databases')
+    .directive('cipherMenu', DatabasesMenu);
 })();
