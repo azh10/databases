@@ -16,8 +16,6 @@
       self.selectedTab = index;
     };
 
-    self.universities = [ {name:"test1", id:1}, {name:"test2", id:2}, {name:"test3", id:3} ];
-
     self.createRSO = function () {
       var university = document.getElementById("new-rso").selectedIndex;
       if (university && self.members.length > 4) {
@@ -49,6 +47,9 @@
     this.init = function () {
       //self.getAbout();
 
+      PortalService.getUniversities().then(function (resp) {
+        self.universities = resp;
+      });
       self.tabs = [
         {
           url: '/users',
@@ -99,6 +100,12 @@
         }
       });
     }
+
+    this.getUniversities = function () {
+      return WebService.doGetAll({
+        url: 'university'
+      });
+    };
   };
 
   angular

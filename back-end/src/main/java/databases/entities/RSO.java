@@ -35,9 +35,10 @@ public class RSO {
     private Set<User> users;
 
     public RSO addUser (User user) {
-        if (this.users == null)
-            this.users = new HashSet<>();
-        this.users.add(user);
+        if (this.users == null) {
+            this.users = new HashSet<User>(){{ add(user); }};
+        } else
+            this.users.add(user);
         return this;
     }
 
