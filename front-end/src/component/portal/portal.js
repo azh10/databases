@@ -99,7 +99,7 @@
           emails: emails
         }
       });
-    }
+    };
 
     this.getUniversities = function () {
       return WebService.doGetAll({

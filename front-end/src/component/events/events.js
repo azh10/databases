@@ -39,7 +39,7 @@
     .config(['$stateProvider', function ($stateProvider) {
       $stateProvider
         .state('portal.events', {
-          url: '/:university?rso',
+          url: '/events/:university?rso',
           templateUrl: 'component/events/events.html',
           controllerAs: 'events',
           controller: 'EventsController'
