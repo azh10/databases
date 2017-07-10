@@ -9,6 +9,7 @@ import databases.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,12 +65,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public HttpEntity<?> validate (
+    public ResponseEntity<?> validate (
             @RequestParam(name = "email") String email,
             @RequestParam(name = "password") String password
     ) {
         User user = userRepository.findOneByEmail(email);
-        return respond(user!=null && user.getPassword().equals(password) ? user.getId() : HttpStatus.UNPROCESSABLE_ENTITY);
+        return respond(user!=null && user.getPassword().equals(password) ? user.setPassword(null) : HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     // to update a user we require a user key (spring will find the user with that key)

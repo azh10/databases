@@ -46,7 +46,7 @@
 
     this.login = function () {
       PortalService.login(self.emailaddress, self.password).then(function (resp) {
-        console.log(resp);
+        self.credential = resp;
       });
     };
 
