@@ -32,7 +32,8 @@ public class EventController {
 
     @GetMapping
     public HttpEntity<?> allEvents () {
-        return respond(eventRepository.findAll());
+
+        return respond(eventRepository.findByType(true));
     }
 
     @GetMapping("/university/{university}")
