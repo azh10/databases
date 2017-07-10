@@ -66,8 +66,14 @@
     </cipher-menu>
   </header>
   <section>
-    <div class="section" ui-view>
+    <div ng-if="portal.credential"  class="section" ui-view>
       <h1 style="text-align: center">Select a tab to populate.</h1>
+    </div>
+    <div ng-if="!portal.credential" class="section">
+      <h3>Login</h3>
+      <input type="email" placeholder="Email" ng-model="portal.email">
+      <input type="password" placeholder="Password" ng-model="portal.password">
+      <button ng-click="portal.login()">Login</button>
     </div>
   </section>
 </div>
