@@ -76,6 +76,7 @@
       <button ng-click="portal.login()">Login</button>
 
       <h3>Signup</h3>
+      <div ng-if="portal.newuser">User created.</div>
       <input type="text"  placeholder="Name" ng-model="portal.newname">
       <input type="email" placeholder="Email" ng-model="portal.newemail">
       <input type="password" placeholder="Password" ng-model="portal.newpassword">

@@ -28,7 +28,12 @@
     
     self.signup = function () {
       var university = document.getElementById("new-rso").selectedIndex;
-      PortalService.createUser(self.newname, self.newemail, self.newpassword, university, null);
+      PortalService.createUser(self.newname, self.newemail, self.newpassword, university, null).then(function (resp) {
+        delete self.newname;
+        delete self.newemail;
+        delete self.newpassword;
+        self.newuser = true;
+      });
     };
 
     self.members = [];
@@ -129,7 +134,7 @@
           name: name,
           email: email,
           password: password,
-          university: university,
+          university: (university===0) ? undefined : university,
           rso: rso
         }
       });

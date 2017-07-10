@@ -53,15 +53,17 @@ public class UserController {
         if (name == null || email == null || password == null)
             return respond(HttpStatus.BAD_REQUEST);
 
-        User newUser = userRepository.save(new User()
+        User newUser = new User()
             .setName(name)
             .setEmail(email)
-            .setPassword(password));
+            .setPassword(password);
+        university.ifPresent(x -> newUser.setUni_id(universityRepository.findOne(x.getId()).getId()));
+        userRepository.save(newUser);
 
         university.ifPresent(x -> universityRepository.save(x.addUser(newUser)));
         rso.ifPresent(x -> rsoRepository.save(x.addUser(newUser)));
 
-        return respond(HttpStatus.ACCEPTED);
+        return respond(newUser);
     }
 
     @PostMapping("/login")
