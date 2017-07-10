@@ -25,6 +25,16 @@
         self.newRSO.uniError = true;
       }
     };
+    
+    self.createUser = function () {
+      var university = document.getElementById("new-rso").selectedIndex;
+      if (university) {
+        delete self.newRSO.uniError;
+        PortalService.createRSO(self.newRSO.name, university, self.members);
+      } else {
+        self.newRSO.uniError = true;
+      }
+    };
 
     self.members = [];
     this.add = function(){
@@ -113,6 +123,19 @@
           name: name,
           university: university,
           emails: emails
+        }
+      });
+    };
+    
+    this.createUser = function (name, email, password, university, rso) {
+      return WebService.doPost({
+        url: 'user',
+        params: {
+          name: name,
+          email: email,
+          password: password,
+          university: university,
+          rso: rso
         }
       });
     };

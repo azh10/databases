@@ -74,6 +74,19 @@
       <input type="email" placeholder="Email" ng-model="portal.email">
       <input type="password" placeholder="Password" ng-model="portal.password">
       <button ng-click="portal.login()">Login</button>
+
+      <h3>Signup</h3>
+      <input type="text"  placeholder="Name" ng-model="portal.newname">
+      <input type="email" placeholder="Email" ng-model="portal.newemail">
+      <input type="password" placeholder="Password" ng-model="portal.newpassword">
+      <div>
+        <span class="error" ng-if="portal.newuniError">Required</span>
+        <select id="new-rso">
+          <option selected disabled hidden>University</option>
+          <option ng-repeat="x in portal.universities">{{x.name}}</option>
+        </select>
+        <button ng-click="console.log('not implemeneted')">Signup</button>
+      </div>
     </div>
   </section>
 </div>
