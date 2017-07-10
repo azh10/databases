@@ -3,17 +3,23 @@
         <tr>
             <th>Title</th>
             <th>Host</th>
+            <th>Time</th>
             <th>Location</th>
+            <th>type</th>
         </tr>
         <tr>
             <td><button style="color: dodgerblue">Create an event</button></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr ng-repeat="event in events.list">
             <td>{{event.title}}</td>
             <td>{{event.rso.name||event.university.name}}</td>
+            <td>{{event.date | date : 'medium'}}</td>
             <td>{{event.location}}</td>
+            <td>{{(event.type==true)?'public':(event.type==null)?'RSO':'private'}}</td>
         </tr>
     </table>
 </div>

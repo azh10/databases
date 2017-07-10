@@ -14,4 +14,5 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
 
     Set<Event> findByUniversity(University university);
     Set<Event> findByRso(RSO rso);
+    Set<Event> findByType(Boolean type);
 }
