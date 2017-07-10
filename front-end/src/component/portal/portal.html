@@ -67,7 +67,7 @@
   </header>
   <section>
     <div ng-if="portal.credential"  class="section" ui-view>
-      <h1 style="text-align: center">Welcome to the college event site.</h1>
+      <h1 style="text-align: center">{{portal.credential.name}}, Welcome to the college event site.</h1>
     </div>
     <div ng-if="!portal.credential" class="section">
       <h3>Login</h3>
