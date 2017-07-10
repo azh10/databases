@@ -26,14 +26,9 @@
       }
     };
     
-    self.createUser = function () {
+    self.signup = function () {
       var university = document.getElementById("new-rso").selectedIndex;
-      if (university) {
-        delete self.newRSO.uniError;
-        PortalService.createRSO(self.newRSO.name, university, self.members);
-      } else {
-        self.newRSO.uniError = true;
-      }
+      PortalService.createUser(self.newname, self.newemail, self.newpassword, university, null);
     };
 
     self.members = [];
