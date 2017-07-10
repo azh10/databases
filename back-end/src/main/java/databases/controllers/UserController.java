@@ -53,14 +53,23 @@ public class UserController {
             return respond(HttpStatus.BAD_REQUEST);
 
         User newUser = userRepository.save(new User()
-                .setName(name)
-                .setEmail(email)
-                .setPassword(password));
+            .setName(name)
+            .setEmail(email)
+            .setPassword(password));
 
         university.ifPresent(x -> universityRepository.save(x.addUser(newUser)));
         rso.ifPresent(x -> rsoRepository.save(x.addUser(newUser)));
 
         return respond(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/login")
+    public HttpEntity<?> validate (
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password
+    ) {
+        User user = userRepository.findOneByEmail(email);
+        return respond(user!=null && user.getPassword().equals(password) ? user.getId() : HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     // to update a user we require a user key (spring will find the user with that key)

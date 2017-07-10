@@ -44,6 +44,12 @@
         self.memberDomain = undefined;
     };
 
+    this.login = function () {
+      PortalService.login(self.emailaddress, self.password).then(function (resp) {
+        console.log(resp);
+      });
+    };
+
     this.init = function () {
       //self.getAbout();
 
@@ -87,6 +93,16 @@
     this.getAbout = function () {
       return WebService.doGet({
         url: 'about'
+      });
+    };
+
+    this.login = function (email, password) {
+      return WebService.doPost({
+        url: 'user/login',
+        params: {
+          email: email,
+          password: password
+        }
       });
     };
 
