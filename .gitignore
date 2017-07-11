@@ -164,3 +164,6 @@ src/main/resources/templates/hib.xml
 
 #Dist files
 dist/
+
+node_modules/
+bower_install/
