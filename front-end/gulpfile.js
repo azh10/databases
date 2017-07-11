@@ -27,7 +27,12 @@ var js = [
   'node_modules/angular/angular.js',
   'node_modules/angular-animate/angular-animate.js',
   'node_modules/angular-ui-router/release/angular-ui-router.js',
-  'node_modules/angular-resource/angular-resource.js'
+  'node_modules/angular-resource/angular-resource.js',
+  'bower_components/angularjs-datetime-picker/angularjs-datetime-picker.js'
+];
+
+var css = [
+  'bower_components/angularjs-datetime-picker/angularjs-datetime-picker.css'
 ];
 
 // -----[ IP Address ]----------------------------------------------------------
@@ -120,11 +125,15 @@ gulp.task('scripts:uglify', function () {
 
 // -----[ Style Tasks ]---------------
 gulp.task('style', function () {
-  gulp.src(['src/**/*.sass', '!src/**/_*.sass'])
+  var sassStream = gulp.src(['src/**/*.sass', '!src/**/_*.sass'])
       .pipe(sourcemaps.init())
-      .pipe(sass())
-      .pipe(concat('style.css'))
       .pipe(sourcemaps.write())
+      .pipe(sass());
+
+  var cssStream = gulp.src(css);
+
+  merge(cssStream, sassStream)
+      .pipe(concat('style.css'))
       .pipe(gulp.dest('dist/assets/'))
       .pipe(connect.reload());
 });

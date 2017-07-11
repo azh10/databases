@@ -20,7 +20,8 @@
     'ui.router',
     'ngResource',
     'ngAnimate',
-    'config'
+    'config',
+    'angularjs-datetime-picker'
   ]).config([
     '$logProvider',
     '$locationProvider',
