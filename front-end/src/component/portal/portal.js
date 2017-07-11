@@ -56,7 +56,11 @@
 
     this.login = function () {
       PortalService.login(self.email, self.password).then(function (resp) {
-        self.credential = resp;
+        if (resp.id)
+          self.credential = resp;
+        else {
+          self.signinerror = true;
+        }
       });
     };
 
