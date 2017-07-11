@@ -130,9 +130,10 @@
           <option ng-repeat="x in portal.universities">{{x.name}}</option>
         </select>
         <!-- TO DO Connect the new university fields-->
-        <input ng-show="portal.show_signup_uni" type="text"  placeholder="University Name"> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
-        <textarea ng-show="portal.show_signup_uni" name="University-About" rows="5" cols="25" placeholder="University About"></textarea> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
-        <input ng-show="portal.show_signup_uni" type="text"  placeholder="University Image URL"> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
+        <input ng-show="portal.show_signup_uni" type="text"  placeholder="University Name" ng-model="portal.newUni.name"> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
+        <input ng-show="portal.show_signup_uni" type="text"  placeholder="University Location" ng-model="portal.newUni.location"> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
+        <textarea ng-show="portal.show_signup_uni" name="University-About" rows="5" cols="25" placeholder="University About" ng-model="portal.newUni.about"></textarea> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
+        <input ng-show="portal.show_signup_uni" type="text"  placeholder="University Image URL" ng-model="portal.newUni.url"> <br ng-show="portal.show_signup_uni"><br ng-show="portal.show_signup_uni">
 
         <a href="" ng-show="portal.show_signup" ng-click="portal.show_signup_uni=true"><h3 ng-show="!portal.show_signup_uni">Don't see your school?</h3></a>
         <button ng-click="portal.signup()">Signup</button>
