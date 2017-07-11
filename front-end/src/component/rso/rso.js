@@ -11,9 +11,14 @@
     };
 
     this.show = function (who, what) {
+      RsoService.getEvents(who.id).then(function (resp) {
+        console.log(resp);
+        self.eventlist = resp;
+      });
+
       self.shownRso = who;
       self.shownPage = what;
-      console.log(what);
+      console.log(what, who);
     };
 
     this.init = function () {
@@ -29,6 +34,10 @@
         url: 'rso'
       });
     };
+    
+    this.getEvents = function (id) {
+      return WebService.doGetAll({url: 'event/rso/'+ id});
+    }
   };
 
   angular

@@ -47,7 +47,7 @@ public class UserController {
             @RequestParam(name = "name") String name,
             @RequestParam(name = "email") String email,
             @RequestParam(name = "password") String password,
-            @RequestParam(name = "university") Optional<University> university,
+            @RequestParam(name = "university") Optional<University> university,// TODO make not optional.
             @RequestParam(name = "about") Optional<String> about,
             @RequestParam(name = "uniname") Optional<String> uniname,
             @RequestParam(name = "unilocation") Optional<String> unilocation,
