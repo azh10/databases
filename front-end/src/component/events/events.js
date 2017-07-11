@@ -7,6 +7,7 @@
     this.getAll = function () {
       EventsService.getAll($stateParams).then(function (response) {
         self.list = response;
+        console.log(self.list);
       });
     };
 

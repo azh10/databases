@@ -7,7 +7,7 @@ angular.module("config", [])
 	"version": "v0.0.0",
 	"showVersion": true,
 	"baseUrl": "http://localhost:9019",
-	"apiServer": "http://192.168.0.13:8081"
+	"apiServer": "http://127.0.0.1:8081"
 })
 
 ;})();

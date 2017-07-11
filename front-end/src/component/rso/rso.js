@@ -10,6 +10,12 @@
       });
     };
 
+    this.show = function (who, what) {
+      self.shownRso = who;
+      self.shownPage = what;
+      console.log(what);
+    };
+
     this.init = function () {
       this.getAll();
     };

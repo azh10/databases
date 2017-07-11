@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static databases.util.ResponseUtil.respond;
 
@@ -47,6 +48,10 @@ public class UserController {
             @RequestParam(name = "email") String email,
             @RequestParam(name = "password") String password,
             @RequestParam(name = "university") Optional<University> university,
+            @RequestParam(name = "about") Optional<String> about,
+            @RequestParam(name = "uniname") Optional<String> uniname,
+            @RequestParam(name = "unilocation") Optional<String> unilocation,
+            @RequestParam(name = "uniimage") Optional<String> uniimage,
             @RequestParam(name = "rso") Optional<RSO> rso
     ) {
 
@@ -57,12 +62,23 @@ public class UserController {
             .setName(name)
             .setEmail(email)
             .setPassword(password);
-        university.ifPresent(x -> newUser.setUni_id(universityRepository.findOne(x.getId()).getId()));
-        userRepository.save(newUser);
 
-        university.ifPresent(x -> universityRepository.save(x.addUser(newUser)));
-        rso.ifPresent(x -> rsoRepository.save(x.addUser(newUser)));
+        if (about.isPresent()) {
 
+            universityRepository.save(new University()
+                    .setAbout(about.get())
+                    .setName(uniname.get())
+                    .setImage_url(uniimage.get())
+                    .setLocation(unilocation.get()));
+
+        } else {
+
+            university.ifPresent(x -> newUser.setUni_id(universityRepository.findOne(x.getId()).getId()));
+            userRepository.save(newUser);
+
+            university.ifPresent(x -> universityRepository.save(x.addUser(newUser)));
+            rso.ifPresent(x -> rsoRepository.save(x.addUser(newUser)));
+        }
         return respond(newUser);
     }
 
@@ -73,6 +89,15 @@ public class UserController {
     ) {
         User user = userRepository.findOneByEmail(email);
         return respond(user!=null && user.getPassword().equals(password) ? user.setPassword(null) : HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @GetMapping("/enrollment")
+    public ResponseEntity<?> enrollment (
+            @RequestParam(name = "user") User user,
+            @RequestParam(name = "ismember") Boolean isMember
+    ) {
+        Set<RSO> rsos = rsoRepository.findByUserAndIsMember(user, isMember);
+        return respond();
     }
 
     // to update a user we require a user key (spring will find the user with that key)

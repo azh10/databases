@@ -58,9 +58,11 @@
 
     this.login = function () {
       PortalService.login(self.email, self.password).then(function (resp) {
+        console.log(resp);
         if (resp.id)
           self.credential = resp;
         else {
+          console.log("Error sign in");
           self.signinerror = true;
         }
       });
@@ -100,6 +102,7 @@
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
+      self.credential = true;
     };
 
     this.init();

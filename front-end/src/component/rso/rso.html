@@ -1,5 +1,36 @@
-<div id="rso-view">
-    <table>
+<div id="rso-view" ng-switch="rso.shownPage">
+    {{rso.shownPage}}
+    <div ng-switch-when="event">
+
+        <comments></comments>
+    </div>
+    <div ng-switch-when="events">
+        {{rso.shownRso}}
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Host</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>type</th>
+            </tr>
+            <tr>
+                <td><button style="color: dodgerblue" ng-click="portal.showModal = 'event'">Create an event</button></td>
+                <td><button data-ng-click="rso.show = 'event'">Join rso</button></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="event in events.list">
+                <td>{{event.title}}</td>
+                <td>{{event.rso.name||event.university.name}}</td>
+                <td>{{event.date | date : 'medium'}}</td>
+                <td>{{event.location}}</td>
+                <td>{{(event.type==true)?'public':(event.type==null)?'RSO':'private'}}</td>
+            </tr>
+        </table>
+    </div>
+    <table ng-switch-default>
         <tr>
             <th>Name</th>
             <th>Contact Email</th>
@@ -11,7 +42,7 @@
             <td></td>
         </tr>
         <tr ng-repeat="org in rso.list"
-            ui-sref="portal.events({university: undefined, rso: {{org.id}}})">
+            data-ng-click="rso.show(org, 'events')">
             <td>{{org.name}}</td>
             <td>{{org.email}}</td>
             <td>{{org.admin.user.name}}</td>
