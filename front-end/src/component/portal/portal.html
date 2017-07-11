@@ -107,24 +107,36 @@
     <div ng-if="portal.credential"  class="section" ui-view>
       <h1 style="text-align: center">{{portal.credential.name}}, Welcome to the college event site.</h1>
     </div>
-    <div ng-if="!portal.credential" class="section">
-      <h3>Login</h3>
-      <input type="email" placeholder="Email" ng-model="portal.email">
-      <input type="password" placeholder="Password" ng-model="portal.password">
-      <button ng-click="portal.login()">Login</button>
-
-      <h3>Signup</h3>
+    <div id="login-view" ng-if="!portal.credential" class="section">
+      <h4 ng-show="!show_signup">Login</h4>
+      <h4 ng-show="show_signup">Signup</h4>
+      <input ng-show="!show_signup" type="email" placeholder="Email" ng-model="portal.email">
+      <br ng-show="!show_signup"><br ng-show="!show_signup">
+      <input ng-show="!show_signup" type="password" placeholder="Password" ng-model="portal.password">
+      <br ng-show="!show_signup"><br ng-show="!show_signup">
+      <button ng-show="!show_signup" ng-click="portal.login()">Login</button>
+      <a href="" ng-click="show_signup=true" ng-show="!show_signup"><h3>Signup here</h3></a>
       <div ng-if="portal.newuser">User created.</div>
-      <input type="text"  placeholder="Name" ng-model="portal.newname">
-      <input type="email" placeholder="Email" ng-model="portal.newemail">
-      <input type="password" placeholder="Password" ng-model="portal.newpassword">
-      <div>
+      <input ng-show="show_signup" type="text"  placeholder="Name" ng-model="portal.newname">
+      <br><br>
+      <input ng-show="show_signup"  type="email" placeholder="Email" ng-model="portal.newemail">
+      <br><br>
+      <input ng-show="show_signup"  type="password" placeholder="Password" ng-model="portal.newpassword">
+      <br><br>
+      <div ng-show="show_signup">
         <span class="error" ng-if="portal.newuniError">Required</span>
-        <select id="new-rso">
+        <select id="new-rso" ng-show="!show_signup_uni">
           <option selected disabled hidden>University</option>
           <option ng-repeat="x in portal.universities">{{x.name}}</option>
         </select>
+        <!-- TO DO Connect the new university fields-->
+        <input ng-show="show_signup_uni" type="text"  placeholder="University Name"> <br ng-show="show_signup_uni"><br ng-show="show_signup_uni">
+        <textarea ng-show="show_signup_uni" name="University-About" rows="5" cols="25" placeholder="University About"></textarea> <br ng-show="show_signup_uni"><br ng-show="show_signup_uni">
+        <input ng-show="show_signup_uni" type="text"  placeholder="University Image URL"> <br ng-show="show_signup_uni"><br ng-show="show_signup_uni">
+
+        <a href="" ng-show="show_signup" ng-click="show_signup_uni=true"><h3 ng-show="!show_signup_uni">Don't see your school?</h3></a>
         <button ng-click="portal.signup()">Signup</button>
+        <a ng-click="show_signup_uni = false"><button ng-click="show_signup =false" name="cancel_button">Cancel</button></a>
       </div>
     </div>
   </section>
