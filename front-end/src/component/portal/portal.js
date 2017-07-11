@@ -33,6 +33,8 @@
         delete self.newemail;
         delete self.newpassword;
         self.newuser = true;
+        self.show_signup = false;
+        self.show_signup_uni = false;
       });
     };
 
