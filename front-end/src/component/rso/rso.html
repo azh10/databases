@@ -11,7 +11,8 @@
             <td></td>
         </tr>
         <tr ng-repeat="org in rso.list"
-            ui-sref="portal.events({university: undefined, rso: {{org.id}}})">
+            ui-sref="portal.events({university: undefined, rso: {{org.id}}})"
+            ng-click="portal.showModal = findByRsoId(Integer rsoid)">
             <td>{{org.name}}</td>
             <td>{{org.email}}</td>
             <td>{{org.admin.user.name}}</td>
