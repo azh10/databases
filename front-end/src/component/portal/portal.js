@@ -25,7 +25,7 @@
         self.newRSO.uniError = true;
       }
     };
-    
+
     self.signup = function () {
       var university = document.getElementById("new-rso").selectedIndex;
       PortalService.createUser(self.newname, self.newemail, self.newpassword, university, null).then(function (resp) {
@@ -75,7 +75,7 @@
         },{
           url: '/rso',
           route: 'portal.rso',
-          name: 'Rso',
+          name: 'RSO',
           template: 'component/rso/rso.html'
         },{
           url: '/university',
@@ -126,7 +126,7 @@
         }
       });
     };
-    
+
     this.createUser = function (name, email, password, university, rso) {
       return WebService.doPost({
         url: 'user',
