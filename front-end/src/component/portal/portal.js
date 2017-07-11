@@ -62,6 +62,7 @@
 
     this.init = function () {
       //self.getAbout();
+      self.credential = true;
 
       PortalService.getUniversities().then(function (resp) {
         self.universities = resp;
