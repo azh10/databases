@@ -10,15 +10,19 @@
       });
     };
 
-    this.show = function (who, what) {
-      RsoService.getEvents(who.id).then(function (resp) {
-        console.log(resp);
-        self.eventlist = resp;
-      });
+    this.show = function (who, what, event) {
+      if (self.eventlist) {
+        self.shownEvent = event;
+      } else {
+        RsoService.getEvents(who.id).then(function (resp) {
+          console.log("getevents",resp);
+          self.eventlist = resp;
+        });
+      }
 
       self.shownRso = who;
       self.shownPage = what;
-      console.log(what, who);
+      console.log("?",what, who, event);
     };
 
     this.init = function () {
