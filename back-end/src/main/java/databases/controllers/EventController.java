@@ -87,28 +87,28 @@ public class EventController {
 
     @PostMapping
     public HttpEntity<?> create (
-            @PathParam("university") Optional<University> university,
-            @PathParam("rso") Optional<RSO> rso,
-            @PathParam("type") Optional<Boolean> type,
+            @PathParam("university") University university,
+            @PathParam("rso") RSO rso,
+            @PathParam("type") Boolean type,
             @PathParam("title") String title,
             @PathParam("location") String location,
             @PathParam("about") String about,
             @PathParam("time") Timestamp time
     ) {
-        Event event = new Event();
-        if (university.isPresent()) {
-            event.setUniversity(university.get());
-            event.setType(type.get());
-        }
-        if (rso.isPresent())
-            event.setRso(rso.get());
-        event
+        Event event = new Event()
             .setTitle(title)
             .setLocation(location)
             .setAbout(about)
-            .setDate(time);
-
-        return respond(eventRepository.save(event));
+            .setDate(time)
+            .setType(type);
+        eventRepository.save(event);
+        if (university != null) {
+            event.setUniversity(university);;
+        }
+        if (rso != null)
+            event.setRso(rso);
+        eventRepository.save(event);
+        return respond();
     }
 
     @PostMapping("/{event}")

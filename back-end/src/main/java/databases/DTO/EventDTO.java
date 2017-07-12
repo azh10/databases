@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,8 +26,9 @@ public class EventDTO {
     private Timestamp date;
     private Set<UserDTO> users;
     private Boolean type;
+    private Integer rsoid;
 
-    private EventDTO(Integer id, String title, String location, String about, Timestamp date, Set<UserDTO> users, Boolean type) {
+    private EventDTO(Integer id, String title, String location, String about, Timestamp date, Set<UserDTO> users, Boolean type, Integer rsoid) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -34,6 +36,7 @@ public class EventDTO {
         this.date = date;
         this.users = users;
         this.type = type;
+        this.rsoid = rsoid;
     }
 
     public static EventDTO toDTO (Event event) {
@@ -42,7 +45,7 @@ public class EventDTO {
         for(User u : event.getUsers()) {
             userDTOS.add(UserDTO.toDTO(u));
         }
-        return new EventDTO(event.getId(), event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS, event.getType());
+        return new EventDTO(event.getId(), event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS, event.getType(), event.getRso().getId());
     }
 
     public static Set<EventDTO> toDTO (Set<Event> events) {

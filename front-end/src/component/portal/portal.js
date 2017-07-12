@@ -75,6 +75,10 @@
       });
     };
 
+    this.createEvent = function (event) {
+      PortalService.createEvent(self.newEvent, $rootScope.credential.uni_id, event);
+    };
+
     this.init = function () {
       //self.getAbout();
       //self.credential = true;
@@ -130,6 +134,22 @@
           password: password
         }
       });
+    };
+
+    this.createEvent = function (event, key, rso) {
+      return WebService.doPost({
+        url: 'event',
+        params: {
+          rso: rso,
+          type: event.type,
+          title: event.title,
+          university: key,
+          location: event.location,
+          about: event.about,
+          time: event.time
+        }
+      })
+
     };
 
     this.createRSO = function (name, university, emails) {

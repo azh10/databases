@@ -3,6 +3,7 @@ package databases.entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -33,7 +34,7 @@ public class Event {
     private University university;
 
     // to know if the event is university or rso based use only one and the other should be null
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rso_id")
     private RSO rso;
 
