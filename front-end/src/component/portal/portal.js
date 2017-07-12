@@ -76,7 +76,9 @@
     };
 
     this.createEvent = function (event) {
-      PortalService.createEvent(self.newEvent, $rootScope.credential.uni_id, event);
+      PortalService.createEvent(self.newEvent, $rootScope.credential.uni_id, event).then(function () {
+        self.newEvent = undefined;
+      });
     };
 
     this.init = function () {

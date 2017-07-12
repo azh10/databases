@@ -48,13 +48,13 @@
             <h2>Create new event</h2>
             <span class="error" ng-if="portal.newEvent.nameError">Required</span>
             <div><input id="rso-name" class="form-control title" type="text" placeholder="Title"
-                   ng-model="portal.newEvent.name"></div>
+                   ng-model="portal.newEvent.title"></div>
             <div><input id="rso-name" class="form-control title" type="text" placeholder="Location"
-                   ng-model="portal.newEvent.name"></div>
+                   ng-model="portal.newEvent.location"></div>
             <div><input id="rso-name" class="form-control title" type="text" placeholder="About"
-                   ng-model="portal.newEvent.name"></div>
+                   ng-model="portal.newEvent.about"></div>
             <div><input datetime-picker date-format="yyyy-MM-dd HH:mm:ss" future-only data-ng-model="portal.newEvent.time"/></div>
-            <button name="Submitbutton">Submit</button>
+            <button ng-click="portal.newEvent.type = true; portal.createEvent(undefined)" name="Submitbutton">Submit</button>
             <button name="Cancelbutton">Cancel</button>
             <br/>
         </div>

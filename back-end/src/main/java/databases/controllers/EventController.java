@@ -5,6 +5,7 @@ import databases.DTO.EventDTO;
 import databases.entities.*;
 import databases.repositories.CommentRepository;
 import databases.repositories.EventRepository;
+import databases.repositories.RSORepository;
 import databases.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -35,6 +36,9 @@ public class EventController {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private RSORepository rsoRepository;
 
     @GetMapping
     public HttpEntity<?> allEvents () {
@@ -88,7 +92,7 @@ public class EventController {
     @PostMapping
     public HttpEntity<?> create (
             @PathParam("university") University university,
-            @PathParam("rso") RSO rso,
+            @PathParam("rso") Integer rso,
             @PathParam("type") Boolean type,
             @PathParam("title") String title,
             @PathParam("location") String location,
@@ -101,12 +105,12 @@ public class EventController {
             .setAbout(about)
             .setDate(time)
             .setType(type);
-        eventRepository.save(event);
+        //eventRepository.save(event);
         if (university != null) {
             event.setUniversity(university);;
         }
         if (rso != null)
-            event.setRso(rso);
+            event.setRso(rsoRepository.findOne(rso));
         eventRepository.save(event);
         return respond();
     }

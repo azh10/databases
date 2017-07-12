@@ -53,7 +53,7 @@ public class RSOController {
     ) {
         Set<RSO> notJoinedRSOs = new HashSet<>();
         for (RSO rso : rsoRepository.findAll())
-            if (rso.getAdmin().getUser().getUni_id() == user.getUni_id() && !rso.hasMember(user))
+            if (rso.getAdmin() != null && rso.getAdmin().getUser().getUni_id() == user.getUni_id() && !rso.hasMember(user))
                 notJoinedRSOs.add(rso);
 
         return respond(notJoinedRSOs);

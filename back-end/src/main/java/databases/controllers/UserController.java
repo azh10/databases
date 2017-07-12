@@ -78,8 +78,7 @@ public class UserController {
 
             universityRepository.save(newUniversity
                     .setEmail(email)
-                    .setAdmin(admin)
-                    .addUser(newUser));
+                    .setAdmin(admin));
         } else {
 
             university.ifPresent(x -> userRepository.save(newUser.setUni_id(universityRepository.findOne(x.getId()).getId())));
