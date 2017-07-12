@@ -54,7 +54,7 @@
       });
     };
     this.edit = function (i) {
-      RsoService.updateMessage(self.shownEvent.id, self.comments[i])
+      RsoService.updateMessage(self.shownEvent.id, self.comments[i]);
     };
 
     this.checkOwner = function (id) {
@@ -64,6 +64,7 @@
     this.init = function () {
       self.getJoinedRSO();
       self.getOtherRSO();
+      self.newevent = false;
     };
 
     this.init();
