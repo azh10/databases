@@ -36,7 +36,7 @@
       });
     };
     this.edit = function (i) {
-      UniversityService.updateMessage(self.shownEvent.id, self.comments[i])
+      UniversityService.updateMessage(self.shownEvent.id, self.comments[i]);
     };
 
     this.checkOwner = function (id) {
