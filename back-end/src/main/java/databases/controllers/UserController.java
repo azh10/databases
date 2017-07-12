@@ -1,8 +1,10 @@
 package databases.controllers;
 
+import databases.entities.Admin;
 import databases.entities.RSO;
 import databases.entities.University;
 import databases.entities.User;
+import databases.repositories.AdminRepository;
 import databases.repositories.RSORepository;
 import databases.repositories.UniversityRepository;
 import databases.repositories.UserRepository;
@@ -27,12 +29,14 @@ public class UserController {
     private UserRepository userRepository;
     private UniversityRepository universityRepository;
     private RSORepository rsoRepository;
+    private AdminRepository adminRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository, UniversityRepository universityRepository, RSORepository rsoRepository) {
+    public UserController(UserRepository userRepository, UniversityRepository universityRepository, RSORepository rsoRepository, AdminRepository adminRepository) {
         this.userRepository = userRepository;
         this.universityRepository = universityRepository;
         this.rsoRepository = rsoRepository;
+        this.adminRepository = adminRepository;
     }
 
     @GetMapping
@@ -69,8 +73,13 @@ public class UserController {
             uniname.ifPresent(x -> newUniversity.setName(x));
             uniimage.ifPresent(x -> newUniversity.setImage_url(x));
             unilocation.ifPresent(x -> newUniversity.setLocation(x));
+            Admin possibleAdmin = adminRepository.findOne(newUser.getId());
+            Admin admin = (possibleAdmin != null)? possibleAdmin : adminRepository.save(new Admin().setUser(newUser));
 
-            universityRepository.save(newUniversity);
+            universityRepository.save(newUniversity
+                    .setEmail(email)
+                    .setAdmin(admin)
+                    .addUser(newUser));
         } else {
 
             university.ifPresent(x -> userRepository.save(newUser.setUni_id(universityRepository.findOne(x.getId()).getId())));

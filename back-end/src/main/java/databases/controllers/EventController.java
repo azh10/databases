@@ -2,9 +2,7 @@ package databases.controllers;
 
 import databases.DTO.CommentDTO;
 import databases.DTO.EventDTO;
-import databases.entities.Event;
-import databases.entities.RSO;
-import databases.entities.University;
+import databases.entities.*;
 import databases.repositories.CommentRepository;
 import databases.repositories.EventRepository;
 import databases.repositories.UniversityRepository;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 
 import static databases.util.ResponseUtil.respond;
@@ -45,6 +44,18 @@ public class EventController {
 
     @GetMapping("/messages/{event}")
     public HttpEntity<?> byEvent (@PathVariable("event") Event event) {
+        return respond(CommentDTO.toDTO(commentRepository.findByEvent(event)));
+    }
+
+    @PostMapping("/messages/{event}")
+    public HttpEntity<?> comment (@PathVariable("event") Event event,
+                                  @PathParam("message") String message,
+                                  @PathParam("user") User user) {
+        commentRepository.save(new Comment()
+                .setUser(user)
+                .setEvent(event)
+                .setMessage(message));
+
         return respond(CommentDTO.toDTO(commentRepository.findByEvent(event)));
     }
 

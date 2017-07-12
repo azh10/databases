@@ -66,7 +66,8 @@ public class RSOController {
             @RequestParam(name = "emails") List<String> emails
     ) {
         User adminU = userRepository.findOneByEmail(emails.remove(0));
-        Admin admin = adminRepository.save(new Admin().setUser(adminU));
+        Admin possibleAdmin = adminRepository.findOne(adminU.getId());
+        Admin admin = (possibleAdmin != null)? possibleAdmin : adminRepository.save(new Admin().setUser(adminU));
         RSO rso = new RSO()
                 .setName(name)
                 .setEmail(adminU.getEmail())

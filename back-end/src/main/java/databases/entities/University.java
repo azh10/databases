@@ -18,11 +18,17 @@ public class University {
 
     private String name;
 
+    private String email;
+
     private String location;
 
     private String about;
 
     private String image_url;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
 
     // university member list
     @ManyToMany
