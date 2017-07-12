@@ -1,4 +1,47 @@
 <div id="events-view" ng-switch="events.shownPage">
+  <div ng-switch-when="event">
+    <div class="main-content-event">
+      <h2 style="text-align: center">{{events.shownEvent.title}}</h2>
+      <p style="text-align: center;">{{events.shownEvent.date | date : 'medium'}}</p>
+      <p style="text-align: center">{{events.shownEvent.about}}</p>
+    </div>
+    <div class="aside-event-single">
+        <h1 style="text-align: center">Attendees</h1>
+        <table>
+          <tbody style="max-height: 200px ;display: block;max-width: 400px; overflow-y: scroll;">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            <tr ng-repeat="events in events.shownEvent.users | orderBy :'name'">
+                <td>{{events.name}}</td>
+                <td>{{events.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+      <table class="comments">
+          <thead ng-if="events.comments">
+              <tr><th>Comments</th><th>author</th><th></th></tr>
+          </thead>
+          <tr>
+              <td><textarea placeholder="Comment" data-ng-model="events.newcomment"></textarea></td>
+              <!--td><input type="text" placeholder="Comment" data-ng-model="rso.newcomment"></td-->
+              <td></td>
+              <td><button ng-click='events.add()'>Add</button></td>
+          </tr>
+          <tr ng-repeat="comment in events.comments | orderBy : 'id'">
+              <td ng-if="!comment.editing"> {{comment.message}} </td>
+              <td ng-if="comment.editing"> <textarea data-ng-model="comment.message"></textarea></td>
+              <td> {{comment.user.name}}</td>
+              <td> <span ng-hide="!events.checkOwner(comment.user.id)">
+                  <button ng-click='events.del($index, comment.id)'>DEL</button>
+                  <button ng-if="!comment.editing" ng-click='comment.editing = true'>EDIT</button>
+                  <button ng-if="comment.editing" ng-click='comment.editing = false; events.edit($index)'>SAVE</button>
+              </span></td>
+          </tr>
+      </table>
+  </div>
     <div ng-switch-when="create">
         <div class="form-group-event">
             <p>&nbsp</p>
@@ -29,7 +72,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr ng-repeat="event in events.list">
+        <tr ng-repeat="event in events.list" data-ng-click="events.show(event, 'event', event)">
             <td>{{event.title}}</td>
             <td>{{event.date | date : 'medium'}}</td>
             <td>{{event.location}}</td>
