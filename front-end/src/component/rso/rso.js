@@ -38,7 +38,9 @@
         url: 'rso'
       });
     };
-
+    this.singleEvent = function (id){
+      return WebService.doGetAll({url: 'event/'+ id});
+    };
     this.getEvents = function (id) {
       return WebService.doGetAll({url: 'event/rso/'+ id});
     };

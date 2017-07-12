@@ -33,17 +33,20 @@
         </table>
     </div>
     <div ng-switch-when="events" class="wrapper">
-        <div id="singleRSO" class="main-content">
+        <div id="singleRSO" class="main-content-uni">
+            <img src="{{university.shownUni.image_url}}" alt="{{university.shownUni.name}}">
             <h2>{{university.shownUni.name}}</h2>
-            <h4 style="font-size:90%">Email : {{university.shownUni.email}}</h4>
             <h4 style="font-size:90%">Admin Name: {{university.shownUni.admin.user.name}}</h4>
             <h4 style="font-size:90%">Admin Email: {{university.shownUni.admin.user.email}}</h4>
+            <h4 style="font-size:90%">About</h4>
+            <p>{{university.shownUni.about}}</p>
             <br><br>
             <h1 style="text-align:center">Events</h1>
         </div>
-        <div class="aside">
+        <div class="aside-uni">
             <h1 id="uniMembers">Members</h1>
             <table>
+              <tbody style="display: block;max-width: 400px; height: 500px; overflow-y: scroll;">
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
@@ -52,6 +55,7 @@
                     <td>{{uni.name}}</td>
                     <td>{{uni.email}}</td>
                 </tr>
+              </tbody>
             </table>
         </div>
         <table>
