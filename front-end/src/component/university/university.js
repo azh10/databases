@@ -25,8 +25,8 @@
     };
 
     this.add = function(){
-      UniversityService.createMessage(self.shownEvent.id, self.newcomment, $rootScope.credential.id).then(function () {
-        self.comments.push({message: self.newcomment, user: {id: $rootScope.credential.id, name: $rootScope.credential.name}});
+      UniversityService.createMessage(self.shownEvent.id, self.newcomment, $rootScope.credential.id).then(function (resp) {
+        self.comments.push(resp);
         self.newcomment = "";
       });
     };

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 
 import static databases.util.ResponseUtil.respond;
 
@@ -48,20 +50,17 @@ public class EventController {
     public HttpEntity<?> createComment (@PathVariable("event") Event event,
                                   @PathParam("message") String message,
                                   @PathParam("user") User user) {
-        commentRepository.save(new Comment()
+        return respond(CommentDTO.toDTO(commentRepository.save(new Comment()
                 .setUser(user)
                 .setEvent(event)
-                .setMessage(message));
-
-        return respond();
+                .setMessage(message))));
     }
     @PostMapping("/messages/{event}/{message}")
     public HttpEntity<?> updateComment (
                                   @PathVariable("message") Comment comment,
                                   @PathParam("message") String message) {
-        commentRepository.save(comment.setMessage(message));
 
-        return respond();
+        return respond(commentRepository.save(comment.setMessage(message)).getId());
     }
 
     @DeleteMapping("/messages/{event}/{message}")
@@ -81,8 +80,14 @@ public class EventController {
     }
 
     @PostMapping
-    public HttpEntity<?> create () {
-        return respond(HttpStatus.NOT_IMPLEMENTED);
+    public HttpEntity<?> create (
+            @PathParam("university") Optional<University> university,
+            @PathParam("rso") Optional<RSO> rso,
+            @PathParam("type") Optional<Boolean> type
+
+            ) {
+
+
     }
 
     @PostMapping("/{event}")
