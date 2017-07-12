@@ -1,7 +1,11 @@
 package databases.controllers;
 
+import databases.DTO.CommentDTO;
+import databases.DTO.EventDTO;
+import databases.entities.Event;
 import databases.entities.RSO;
 import databases.entities.University;
+import databases.repositories.CommentRepository;
 import databases.repositories.EventRepository;
 import databases.repositories.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +34,28 @@ public class EventController {
     @Autowired
     private UniversityRepository universityRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
     @GetMapping
     public HttpEntity<?> allEvents () {
 
-        return respond(eventRepository.findByType(true));
+        return respond(EventDTO.toDTO(eventRepository.findByType(true)));
+    }
+
+    @GetMapping("/messages/{event}")
+    public HttpEntity<?> byEvent (@PathVariable("event") Event event) {
+        return respond(CommentDTO.toDTO(commentRepository.findByEvent(event)));
     }
 
     @GetMapping("/university/{university}")
     public HttpEntity<?> byUniversity (@PathVariable("university") University university) {
-        return respond((university!=null) ? eventRepository.findByUniversity(university) : new ArrayList<>());
+        return respond((university!=null) ? EventDTO.toDTO(eventRepository.findByUniversity(university)) : new ArrayList<>());
     }
 
     @GetMapping("/rso/{rso}")
     public HttpEntity<?> byRso (@PathVariable("rso") RSO rso) {
-        return respond((rso!=null) ? eventRepository.findByRso(rso) : new ArrayList<>());
+        return respond((rso!=null) ? EventDTO.toDTO(eventRepository.findByRso(rso)) : new ArrayList<>());
     }
 
     @PostMapping

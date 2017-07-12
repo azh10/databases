@@ -18,7 +18,7 @@ public class AboutDTO implements Serializable{
     private final String version;
     private final String description;
 
-    public AboutDTO(String name, String version, String description) {
+    private AboutDTO(String name, String version, String description) {
         this.name = name;
         this.version = version;
         this.description = description;

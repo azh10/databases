@@ -12,7 +12,11 @@
 
     this.show = function (who, what, event) {
       if (self.eventlist) {
-        self.shownEvent = event;
+        UniversityService.getMessages(event.id).then(function (resp) {
+          self.shownEvent = event;
+          self.comments = resp;
+          console.log("shownevent",self.shownEvent);
+        });
       } else {
         UniversityService.getEvents(who.id).then(function (resp) {
           console.log(resp);
@@ -23,6 +27,14 @@
       self.shownUni = who;
       self.shownPage = what;
       console.log(what, who, event, "show");
+    };
+
+    this.add = function(){
+        self.comments.push(self.newcomment);
+        self.newcomment = "";
+    };
+    this.del = function(i){
+      self.comments.splice(i,1);
     };
 
     this.init = function () {
@@ -41,6 +53,10 @@
 
     this.getEvents = function (id) {
       return WebService.doGetAll({url: 'event/university/'+ id});
+    };
+
+    this.getMessages = function (id) {
+      return WebService.doGetAll({url: 'event/messages/'+ id});
     };
   };
 

@@ -18,13 +18,15 @@ import java.util.Set;
 @Accessors
 public class EventDTO {
 
+    private Integer id;
     private String title;
     private String location;
     private String about;
     private Timestamp date;
     private Set<UserDTO> users;
 
-    private EventDTO(String title, String location, String about, Timestamp date, Set<UserDTO> users) {
+    private EventDTO(Integer id, String title, String location, String about, Timestamp date, Set<UserDTO> users) {
+        this.id = id;
         this.title = title;
         this.location = location;
         this.about = about;
@@ -38,7 +40,7 @@ public class EventDTO {
         for(User u : event.getUsers()) {
             userDTOS.add(UserDTO.toDTO(u));
         }
-        return new EventDTO(event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS);
+        return new EventDTO(event.getId(), event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS);
     }
 
     public static Set<EventDTO> toDTO (Set<Event> events) {

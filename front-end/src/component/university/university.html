@@ -17,11 +17,16 @@
         <p style="text-align: center; color: grey;">{{university.shownEvent.date | date : 'medium'}}</p>
         <p>{{university.shownEvent.about}}</p>
         <comments></comments>
+        {{university.comments}}
         <table>
-            <thead ng-if="university.shownEvent.comments">
-            <tr><th>Comments</th><th></th></tr>
+            <thead ng-if="university.comments">
+                <tr><th>Comments</th><th></th></tr>
             </thead>
-            <tr ng-repeat='comment in university.shownEvent.comments'>
+            <tr>
+                <td><input type="text" placeholder="Comment" data-ng-model="university.newcomment"></td>
+                <td><button ng-click='university.add()'>Add</button></td>
+            </tr>
+            <tr ng-repeat='comment in university.comments'>
                 <td> {{comment.message}} </td>
                 <td><button ng-click='university.del($index)'>DEL</button></td>
             </tr>
