@@ -45,6 +45,7 @@
     this.init = function () {
       self.getJoinedRSO();
       self.getOtherRSO();
+      self.newevent = false;
     };
 
     this.init();

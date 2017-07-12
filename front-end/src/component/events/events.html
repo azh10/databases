@@ -1,14 +1,18 @@
 <div id="events-view" ng-switch="events.shownPage">
     <div ng-switch-when="create">
-        <div class="form-group">
+        <div class="form-group-event">
+            <p>&nbsp</p>
+            <h2>Create new event</h2>
             <span class="error" ng-if="portal.newEvent.nameError">Required</span>
-            <input id="rso-name" class="form-control title" type="text" placeholder="Title"
-                   ng-model="portal.newEvent.name">
-            <input id="rso-name" class="form-control title" type="text" placeholder="Location"
-                   ng-model="portal.newEvent.name">
-            <input id="rso-name" class="form-control title" type="text" placeholder="About"
-                   ng-model="portal.newEvent.name">
-            <input datetime-picker date-format="yyyy-MM-dd HH:mm:ss" future-only data-ng-model="university.time"/>
+            <div><input id="rso-name" class="form-control title" type="text" placeholder="Title"
+                   ng-model="portal.newEvent.name"></div>
+            <div><input id="rso-name" class="form-control title" type="text" placeholder="Location"
+                   ng-model="portal.newEvent.name"></div>
+            <div><input id="rso-name" class="form-control title" type="text" placeholder="About"
+                   ng-model="portal.newEvent.name"></div>
+            <div><input datetime-picker date-format="yyyy-MM-dd HH:mm:ss" future-only data-ng-model="university.time"/></div>
+            <button name="Submitbutton">Submit</button>
+            <button name="Cancelbutton">Cancel</button>
             <br/>
         </div>
     </div>
