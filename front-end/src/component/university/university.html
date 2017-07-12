@@ -1,11 +1,83 @@
-<div id="university-view">
-    <table>
-        <tr>
-            <th>University</th>
-        </tr>
-        <tr ng-repeat="org in university.list"
-            ui-sref="portal.events({university: {{org.id}}, rso: undefined})">
-            <td>{{org.name}}</td>
-        </tr>
-    </table>
+<div id="university-view" ng-switch="university.shownPage">
+    <div ng-switch-when="create">
+        <div class="form-group">
+            <span class="error" ng-if="portal.newEvent.nameError">Required</span>
+            <input id="rso-name" class="form-control title" type="text" placeholder="Title"
+                   ng-model="portal.newEvent.name">
+            <input id="rso-name" class="form-control title" type="text" placeholder="Location"
+                   ng-model="portal.newEvent.name">
+            <input id="rso-name" class="form-control title" type="text" placeholder="About"
+                   ng-model="portal.newEvent.name">
+            <input datetime-picker date-format="yyyy-MM-dd HH:mm:ss" future-only data-ng-model="university.time"/>
+            <br/>
+        </div>
+    </div>
+    <div ng-switch-when="event">
+
+        <comments></comments>
+    </div>
+    <div ng-switch-when="events" class="wrapper">
+        <div id="singleRSO" class="main-content">
+            <h2>{{university.shownUni.name}}</h2>
+            <h4 style="font-size:90%">Email : {{university.shownUni.email}}</h4>
+            <h4 style="font-size:90%">Admin Name: {{university.shownUni.admin.user.name}}</h4>
+            <h4 style="font-size:90%">Admin Email: {{university.shownUni.admin.user.email}}</h4>
+            <br><br>
+            <h1 style="text-align:center">Events</h1>
+        </div>
+        <div class="aside">
+            <h1 id="uniMembers">Members</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                <tr ng-repeat="uni in university.shownUni.users | orderBy :'name'">
+                    <td>{{uni.name}}</td>
+                    <td>{{uni.email}}</td>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Host</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>type</th>
+            </tr>
+            <tr>
+                <td>
+                    <button style="color: dodgerblue" ng-click="university.shownPage = 'create'">Create an event
+                    </button>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="event in university.eventlist">
+                <td>{{event.title}}</td>
+                <td>{{event.rso.name||event.university.name}}</td>
+                <td>{{event.date | date : 'medium'}}</td>
+                <td>{{event.location}}</td>
+                <td>{{(event.type==true)?'public':(event.type==null)?'RSO':'private'}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-switch-default>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Contact Email</th>
+                <th>Admin Name</th>
+            </tr>
+            <tr ng-repeat="org in university.list"
+                data-ng-click="university.show(org, 'events')">
+                <td>{{org.name}}</td>
+                <td>{{org.email}}</td>
+                <td>{{org.admin.user.name}}</td>
+            </tr>
+        </table>
+    </div>
 </div>
