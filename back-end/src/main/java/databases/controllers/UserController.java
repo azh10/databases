@@ -61,19 +61,19 @@ public class UserController {
             .setName(name)
             .setEmail(email)
             .setPassword(password);
+        userRepository.save(newUser);
 
         if (about.isPresent()) {
+            University newUniversity = new University();
+            about.ifPresent(x -> newUniversity.setAbout(x));
+            uniname.ifPresent(x -> newUniversity.setName(x));
+            uniimage.ifPresent(x -> newUniversity.setImage_url(x));
+            unilocation.ifPresent(x -> newUniversity.setLocation(x));
 
-            universityRepository.save(new University()
-                    .setAbout(about.get())
-                    .setName(uniname.get())
-                    .setImage_url(uniimage.get())
-                    .setLocation(unilocation.get()));
-
+            universityRepository.save(newUniversity);
         } else {
 
-            university.ifPresent(x -> newUser.setUni_id(universityRepository.findOne(x.getId()).getId()));
-            userRepository.save(newUser);
+            university.ifPresent(x -> userRepository.save(newUser.setUni_id(universityRepository.findOne(x.getId()).getId())));
 
             university.ifPresent(x -> universityRepository.save(x.addUser(newUser)));
             rso.ifPresent(x -> rsoRepository.save(x.addUser(newUser)));

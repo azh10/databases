@@ -27,14 +27,24 @@
 
     self.signup = function () {
       var university = document.getElementById("new-rso").selectedIndex;
-      PortalService.createUser(self.newname, self.newemail, self.newpassword, university, null).then(function (resp) {
-        delete self.newname;
-        delete self.newemail;
-        delete self.newpassword;
-        self.newuser = true;
-        self.show_signup = false;
-        self.show_signup_uni = false;
-      });
+      if (self.show_signup_uni)
+        PortalService.createUser(self.newname, self.newemail, self.newpassword, undefined, self.newUni.about, self.newUni.name, self.newUni.location, self.newUni.url, undefined).then(function (resp) {
+          delete self.newname;
+          delete self.newemail;
+          delete self.newpassword;
+          self.newUni.about = self.newUni.name = self.newUni.location = self.newUni.url = undefined;
+          self.newuser = true;
+          self.show_signup = false;
+          self.show_signup_uni = false;
+        });
+      else if (self.show_signup)
+        PortalService.createUser(self.newname, self.newemail, self.newpassword, university, undefined, undefined, undefined, undefined).then(function (resp) {
+          delete self.newname;
+          delete self.newemail;
+          delete self.newpassword;
+          self.newuser = true;
+          self.show_signup = false;
+        });
     };
 
     self.members = [];
@@ -57,6 +67,7 @@
 
     this.login = function () {
       PortalService.login(self.email, self.password).then(function (resp) {
+        self.newuser = false;
         if (resp.id)
           $rootScope.credential = self.credential = resp;
         else
@@ -98,7 +109,7 @@
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
-      $rootScope.credential = $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
+      //$rootScope.credential = $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
     };
 
     this.init();
@@ -132,7 +143,7 @@
       });
     };
 
-    this.createUser = function (name, email, password, university, rso) {
+    this.createUser = function (name, email, password, university, about, uniname, unilocation, uniiamge, rso) {
       return WebService.doPost({
         url: 'user',
         params: {
@@ -140,6 +151,10 @@
           email: email,
           password: password,
           university: (university===0) ? undefined : university,
+          about: about,
+          uniname: uniname,
+          unilocation: unilocation,
+          uniimage: uniiamge,
           rso: rso
         }
       });
