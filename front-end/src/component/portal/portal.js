@@ -17,13 +17,12 @@
     };
 
     self.createRSO = function () {
-      var university = document.getElementById("new-rso").selectedIndex;
-      if (university && self.members.length > 4) {
-        delete self.newRSO.uniError;
-        PortalService.createRSO(self.newRSO.name, university, self.members);
-      } else {
-        self.newRSO.uniError = true;
-      }
+      if (self.members.length > 4)
+        PortalService.createRSO(self.newRSO.name, $rootScope.credential.uni_id, self.members).then(function (resp) {
+          self.members = [];
+          self.newRSO = undefined;
+          self.showModal = false;
+        });
     };
 
     self.signup = function () {
@@ -58,13 +57,10 @@
 
     this.login = function () {
       PortalService.login(self.email, self.password).then(function (resp) {
-        console.log(resp);
         if (resp.id)
-          self.credential = resp;
-        else {
-          console.log("Error sign in");
+          $rootScope.credential = self.credential = resp;
+        else
           self.signinerror = true;
-        }
       });
     };
 
@@ -75,12 +71,12 @@
         self.universities = resp;
       });
       self.tabs = [
-        {
+        /*{
           url: '/users',
           route: 'portal.users',
           name: 'Users',
           template: 'component/users/users.html'
-        },{
+        },*/{
           url: '/rso',
           route: 'portal.rso',
           name: 'RSO',
@@ -102,7 +98,7 @@
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
-      $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
+      $rootScope.credential = $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
     };
 
     this.init();

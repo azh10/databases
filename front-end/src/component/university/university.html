@@ -59,10 +59,9 @@
         <table>
             <tr>
                 <th>Title</th>
-                <th>Host</th>
+                <th>Type</th>
                 <th>Time</th>
                 <th>Location</th>
-                <th>type</th>
             </tr>
             <tr>
                 <td>
@@ -72,12 +71,10 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
             </tr>
             <tr ng-repeat="event in university.eventlist"
                 data-ng-click="university.show(event, 'event', event)">
                 <td>{{event.title}}</td>
-                <td>{{event.rso.name||event.university.name}}</td>
                 <td>{{event.date | date : 'medium'}}</td>
                 <td>{{event.location}}</td>
                 <td>{{(event.type==true)?'public':(event.type==null)?'RSO':'private'}}</td>

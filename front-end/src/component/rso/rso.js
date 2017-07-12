@@ -29,18 +29,14 @@
     };
 
     this.show = function (who, what, event) {
-      if (self.eventlist) {
+      if (self.eventlist)
         self.shownEvent = event;
-      } else {
+      else
         RsoService.getEvents(who.id).then(function (resp) {
-          console.log("getevents",resp);
           self.eventlist = resp;
         });
-      }
-
       self.shownRso = who;
       self.shownPage = what;
-      console.log("?",what, who, event);
     };
 
     this.init = function () {
@@ -53,7 +49,6 @@
 
   var RsoService = function (WebService, $rootScope) {
     this.join = function (id) {
-      console.log(id);
       return WebService.doPost({
         url: 'user/' + $rootScope.credential.id,
         params: {
@@ -62,7 +57,6 @@
       });
     };
     this.leave = function (id) {
-      console.log(id);
       return WebService.doPost({
         url: 'user/' + $rootScope.credential.id,
         params: {

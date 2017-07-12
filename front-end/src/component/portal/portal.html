@@ -57,14 +57,6 @@
         </div>
 
         <div>
-          <span class="error" ng-if="portal.newRSO.uniError">Required</span>
-          <select id="new-rso">
-            <option selected disabled hidden>University</option>
-            <option ng-repeat="x in portal.universities">{{x.name}}</option>
-          </select>
-        </div>
-
-        <div>
           <input ng-if="portal.members.length" ng-model="portal.newmember" style="width: 80%" placeholder="Member email address">
           <input ng-if="!portal.members.length" ng-model="portal.newmember" style="width: 80%" placeholder="Admin email address">
           <button ng-click='portal.add()'>Add</button>

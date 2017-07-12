@@ -11,22 +11,17 @@
     };
 
     this.show = function (who, what, event) {
-      if (self.eventlist) {
+      if (self.eventlist)
         UniversityService.getMessages(event.id).then(function (resp) {
           self.shownEvent = event;
           self.comments = resp;
-          console.log("shownevent",self.shownEvent);
         });
-      } else {
+      else
         UniversityService.getEvents(who.id).then(function (resp) {
-          console.log(resp);
           self.eventlist = resp;
         });
-      }
-
       self.shownUni = who;
       self.shownPage = what;
-      console.log(what, who, event, "show");
     };
 
     this.add = function(){

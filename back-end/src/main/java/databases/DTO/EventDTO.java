@@ -24,14 +24,16 @@ public class EventDTO {
     private String about;
     private Timestamp date;
     private Set<UserDTO> users;
+    private Boolean type;
 
-    private EventDTO(Integer id, String title, String location, String about, Timestamp date, Set<UserDTO> users) {
+    private EventDTO(Integer id, String title, String location, String about, Timestamp date, Set<UserDTO> users, Boolean type) {
         this.id = id;
         this.title = title;
         this.location = location;
         this.about = about;
         this.date = date;
         this.users = users;
+        this.type = type;
     }
 
     public static EventDTO toDTO (Event event) {
@@ -40,7 +42,7 @@ public class EventDTO {
         for(User u : event.getUsers()) {
             userDTOS.add(UserDTO.toDTO(u));
         }
-        return new EventDTO(event.getId(), event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS);
+        return new EventDTO(event.getId(), event.getTitle(), event.getLocation(), event.getAbout(), event.getDate(), userDTOS, event.getType());
     }
 
     public static Set<EventDTO> toDTO (Set<Event> events) {
