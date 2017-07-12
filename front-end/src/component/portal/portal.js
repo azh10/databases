@@ -115,7 +115,7 @@
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
-      $rootScope.credential = $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
+      //$rootScope.credential = $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
     };
 
     this.init();

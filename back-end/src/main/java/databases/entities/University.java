@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -39,12 +40,16 @@ public class University {
     private Set<User> users;
 
     public University addUser (User user) {
-        this.users.add(user);
+        if (this.users == null)
+            this.users = new HashSet<>();
+        if (user != null)
+            this.users.add(user);
         return this;
     }
 
     public University removeUser (User user) {
-        this.users.remove(user);
+        if (user != null)
+            this.users.remove(user);
         return this;
     }
 }
