@@ -13,9 +13,26 @@
         </div>
     </div>
     <div ng-switch-when="event">
-        <h2 style="text-align: center">{{university.shownEvent.title}}</h2>
-        <p style="text-align: center; color: grey;">{{university.shownEvent.date | date : 'medium'}}</p>
-        <p>{{university.shownEvent.about}}</p>
+      <div class="main-content-event">
+        <h1 style="text-align: center">{{university.shownEvent.title}}</h1>
+        <p style="text-align: center">{{university.shownEvent.date | date : 'medium'}}</p>
+        <p style="text-align: center">{{university.shownEvent.about}}</p>
+      </div>
+        <div class="aside-uni">
+            <h1 style="text-align: center">Attendees</h1>
+            <table>
+              <tbody style="display: block;max-width: 400px; max-height: 220px; overflow-y: scroll;">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+                <tr ng-repeat="uni in university.shownEvent.users | orderBy :'name'">
+                    <td>{{uni.name}}</td>
+                    <td>{{uni.email}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
         <table class="comments">
             <thead ng-if="university.comments">
                 <tr><th>Comments</th><th>author</th><th></th></tr>
