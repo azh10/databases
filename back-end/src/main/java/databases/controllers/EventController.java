@@ -48,20 +48,17 @@ public class EventController {
     public HttpEntity<?> createComment (@PathVariable("event") Event event,
                                   @PathParam("message") String message,
                                   @PathParam("user") User user) {
-        commentRepository.save(new Comment()
+        return respond(CommentDTO.toDTO(commentRepository.save(new Comment()
                 .setUser(user)
                 .setEvent(event)
-                .setMessage(message));
-
-        return respond();
+                .setMessage(message))));
     }
     @PostMapping("/messages/{event}/{message}")
     public HttpEntity<?> updateComment (
                                   @PathVariable("message") Comment comment,
                                   @PathParam("message") String message) {
-        commentRepository.save(comment.setMessage(message));
 
-        return respond();
+        return respond(commentRepository.save(comment.setMessage(message)).getId());
     }
 
     @DeleteMapping("/messages/{event}/{message}")
