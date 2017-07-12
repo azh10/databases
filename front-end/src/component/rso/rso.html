@@ -110,7 +110,7 @@
                 <th>Admin Name</th>
                 <th></th>
             </tr>
-            <tr ng-repeat="org in rso.joinedlist">
+            <tr ng-repeat="org in rso.joinedlist | orderBy :'name'">
                 <td data-ng-click="rso.show(org, 'events', null)">{{org.name}}</td>
                 <td data-ng-click="rso.show(org, 'events', null)">{{org.email}}</td>
                 <td data-ng-click="rso.show(org, 'events', null)">{{org.admin.user.name}}</td>
@@ -131,7 +131,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr ng-repeat="org in rso.otherlist">
+            <tr ng-repeat="org in rso.otherlist| orderBy :'name'">
                 <td>{{org.name}}</td>
                 <td>{{org.email}}</td>
                 <td>{{org.admin.user.name}}</td>

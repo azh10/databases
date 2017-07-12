@@ -62,9 +62,9 @@
     <table ng-switch-default>
         <tr>
             <th>Title</th>
-            <th>Type</th>
             <th>Time</th>
             <th>Location</th>
+            <th>Type</th>
         </tr>
         <tr>
             <td><button style="color: dodgerblue" ng-click="events.shownPage = 'create'">Create an event</button></td>
@@ -72,7 +72,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr ng-repeat="event in events.list" data-ng-click="events.show(event, 'event', event)">
+        <tr ng-repeat="event in events.list | orderBy :'date'" data-ng-click="events.show(event, 'event', event)">
             <td>{{event.title}}</td>
             <td>{{event.date | date : 'medium'}}</td>
             <td>{{event.location}}</td>

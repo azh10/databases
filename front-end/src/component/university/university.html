@@ -117,7 +117,7 @@
                 <th>Contact Email</th>
                 <th>Admin Name</th>
             </tr>
-            <tr ng-repeat="org in university.list"
+            <tr ng-repeat="org in university.list | orderBy :'name'"
                 data-ng-click="university.show(org, 'events')">
                 <td>{{org.name}}</td>
                 <td>{{org.admin.user.email}}</td>
