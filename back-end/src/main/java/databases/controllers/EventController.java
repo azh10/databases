@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
@@ -69,6 +70,11 @@ public class EventController {
         return respond();
     }
 
+    @GetMapping("/{event}")
+    public HttpEntity<?> byId (@PathVariable("event") Event event) {
+        return respond(EventDTO.toDTO(eventRepository.findOne(event.getId())));
+    }
+
     @GetMapping("/university/{university}")
     public HttpEntity<?> byUniversity (@PathVariable("university") University university) {
         return respond((university!=null) ? EventDTO.toDTO(eventRepository.findByUniversity(university)) : new ArrayList<>());
@@ -83,11 +89,26 @@ public class EventController {
     public HttpEntity<?> create (
             @PathParam("university") Optional<University> university,
             @PathParam("rso") Optional<RSO> rso,
-            @PathParam("type") Optional<Boolean> type
+            @PathParam("type") Optional<Boolean> type,
+            @PathParam("title") String title,
+            @PathParam("location") String location,
+            @PathParam("about") String about,
+            @PathParam("time") Timestamp time
+    ) {
+        Event event = new Event();
+        if (university.isPresent()) {
+            event.setUniversity(university.get());
+            event.setType(type.get());
+        }
+        if (rso.isPresent())
+            event.setRso(rso.get());
+        event
+            .setTitle(title)
+            .setLocation(location)
+            .setAbout(about)
+            .setDate(time);
 
-            ) {
-
-
+        return respond(eventRepository.save(event));
     }
 
     @PostMapping("/{event}")
