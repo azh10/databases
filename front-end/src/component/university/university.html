@@ -18,16 +18,23 @@
         <p>{{university.shownEvent.about}}</p>
         <table class="comments">
             <thead ng-if="university.comments">
-                <tr><th>Comments</th><th></th></tr>
+                <tr><th>Comments</th><th>author</th><th></th></tr>
             </thead>
             <tr>
                 <td><textarea placeholder="Comment" data-ng-model="university.newcomment"></textarea></td>
                 <!--td><input type="text" placeholder="Comment" data-ng-model="university.newcomment"></td-->
+                <td></td>
                 <td><button ng-click='university.add()'>Add</button></td>
             </tr>
             <tr ng-repeat='comment in university.comments'>
-                <td> {{comment.message}} </td>
-                <td><button ng-click='university.del($index)'>DEL</button><button ng-click='console.log("TODO")'>EDIT</button></td>
+                <td ng-if="!comment.editing"> {{comment.message}} </td>
+                <td ng-if="comment.editing"> <textarea data-ng-model="comment.message"></textarea></td>
+                <td> {{comment.user.name}}</td>
+                <td> <span ng-hide="!university.checkOwner(comment.user.id)">
+                    <button ng-click='university.del($index, comment.id)'>DEL</button>
+                    <button ng-if="!comment.editing" ng-click='comment.editing = true'>EDIT</button>
+                    <button ng-if="comment.editing" ng-click='comment.editing = false; university.edit($index)'>SAVE</button>
+                </span></td>
             </tr>
         </table>
     </div>

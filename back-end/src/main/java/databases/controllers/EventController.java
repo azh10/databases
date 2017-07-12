@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class EventController {
     }
 
     @PostMapping("/messages/{event}")
-    public HttpEntity<?> comment (@PathVariable("event") Event event,
+    public HttpEntity<?> createComment (@PathVariable("event") Event event,
                                   @PathParam("message") String message,
                                   @PathParam("user") User user) {
         commentRepository.save(new Comment()
@@ -56,7 +53,21 @@ public class EventController {
                 .setEvent(event)
                 .setMessage(message));
 
-        return respond(CommentDTO.toDTO(commentRepository.findByEvent(event)));
+        return respond();
+    }
+    @PostMapping("/messages/{event}/{message}")
+    public HttpEntity<?> updateComment (
+                                  @PathVariable("message") Comment comment,
+                                  @PathParam("message") String message) {
+        commentRepository.save(comment.setMessage(message));
+
+        return respond();
+    }
+
+    @DeleteMapping("/messages/{event}/{message}")
+    public HttpEntity<?> deleteComment (@PathVariable("message") Comment comment) {
+        commentRepository.delete(comment);
+        return respond();
     }
 
     @GetMapping("/university/{university}")

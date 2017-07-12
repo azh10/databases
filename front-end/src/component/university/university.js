@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var UniversityController = function (UniversityService, ConStore) {
+  var UniversityController = function (UniversityService, ConStore, $rootScope) {
     var self = this;
 
     this.getAll = function () {
@@ -25,11 +25,22 @@
     };
 
     this.add = function(){
-        self.comments.push({message: self.newcomment});
+      UniversityService.createMessage(self.shownEvent.id, self.newcomment, $rootScope.credential.id).then(function () {
+        self.comments.push({message: self.newcomment, user: {id: $rootScope.credential.id, name: $rootScope.credential.name}});
         self.newcomment = "";
+      });
     };
-    this.del = function(i){
-      self.comments.splice(i,1);
+    this.del = function(i, id){
+      UniversityService.deleteMessage(self.shownEvent.id, id).then(function () {
+        self.comments.splice(i,1);
+      });
+    };
+    this.edit = function (i) {
+      UniversityService.updateMessage(self.shownEvent.id, self.comments[i])
+    };
+
+    this.checkOwner = function (id) {
+      return $rootScope.credential.id === id;
     };
 
     this.init = function () {
@@ -44,6 +55,18 @@
       return WebService.doGetAll({
         url: 'university'
       });
+    };
+
+    this.createMessage = function (id, message, user) {
+      return WebService.doPost({url: 'event/messages/'+ id, params: {message: message, user: user}});
+    };
+
+    this.updateMessage = function (id, message) {
+      return WebService.doPost({url: 'event/messages/'+ id + '/' + message.id, params: {message: message.message}});
+    };
+
+    this.deleteMessage = function (id, message) {
+      return WebService.doDelete({url: 'event/messages/'+ id + '/' + message});
     };
 
     this.getEvents = function (id) {
@@ -73,6 +96,7 @@
     .controller('UniversityController', [
       'UniversityService',
       'ConStore',
+      '$rootScope',
       UniversityController
     ]);
 })();
