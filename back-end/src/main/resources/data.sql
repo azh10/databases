@@ -314,6 +314,35 @@ insert ignore into db_example.event_users (event_id, user_id) values
   ,(47,150), (47,160), (47,170), (47,180), (47,190)
   ,(49,130), (47,140), (47,150), (47,160), (47,170);
 
+insert ignore into db_example.comment (message, event_id,user_id) values
+  ("I wonder what prizes there are",1,500),("Ian, I heard that is was a Raspberry Pi!",1,284)
+  ,("Free Pizza? I'll be there!",1,22),("Harry, you don't need anymore pizza ;)",1,55)
+  ,("Should I bring multiple copies?",3,21),("Do we need our laptop?",3,31)
+  ,("Can someone email me the tips, I won't be able to make it",3,41),("Angela, I'll email you the tips!",3,61);
+
+
+
+UPDATE db_example.university Set admin_id = "1"
+  where id = "1";
+UPDATE db_example.university Set admin_id = "2"
+    where id = "2";
+UPDATE db_example.university Set admin_id = "3"
+      where id = "3";
+UPDATE db_example.university Set admin_id = "4"
+        where id = "4";
+UPDATE db_example.university Set admin_id = "5"
+  where id = "5";
+UPDATE db_example.university Set admin_id = "6"
+    where id = "6";
+UPDATE db_example.university Set admin_id = "7"
+      where id = "7";
+UPDATE db_example.university Set admin_id = "8"
+        where id = "8";
+UPDATE db_example.university Set admin_id = "9"
+      where id = "9";
+UPDATE db_example.university Set admin_id = "10"
+        where id = "10";
+
 
 -- insert ignore into db_example.university_users (university_id, user_id) values
   -- (1,102), (2,103), (1,112), (2,113), (1,112), (2,113);

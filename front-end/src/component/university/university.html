@@ -26,7 +26,7 @@
                 <td></td>
                 <td><button ng-click='university.add()'>Add</button></td>
             </tr>
-            <tr ng-repeat='comment in university.comments'>
+            <tr ng-repeat="comment in university.comments | orderBy : 'id'">
                 <td ng-if="!comment.editing"> {{comment.message}} </td>
                 <td ng-if="comment.editing"> <textarea data-ng-model="comment.message"></textarea></td>
                 <td> {{comment.user.name}}</td>
@@ -67,9 +67,9 @@
         <table>
             <tr>
                 <th>Title</th>
-                <th>Type</th>
                 <th>Time</th>
                 <th>Location</th>
+                <th>Type</th>
             </tr>
             <tr>
                 <td>
@@ -80,7 +80,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr ng-repeat="event in university.eventlist"
+            <tr ng-repeat="event in university.eventlist | orderBy :['date','title']"
                 data-ng-click="university.show(event, 'event', event)">
                 <td>{{event.title}}</td>
                 <td>{{event.date | date : 'medium'}}</td>

@@ -33,16 +33,19 @@
         <br><br><h1 style="text-align:center">Events</h1>
       </div>
       <div class="aside">
-        <h1 id="rsoMembers">Members</h1>
+        <h1 style="max-width: 400px" id="rsoMembers">Members</h1>
         <table>
+          <tbody style="display: block;max-width: 400px; height: 205px; overflow-y: scroll;">
           <tr>
             <th>Name</th>
             <th>Email</th>
           </tr>
+
           <tr ng-repeat="rso in rso.shownRso.users | orderBy :'name'">
             <td>{{rso.name}}</td>
             <td>{{rso.email}}</td>
           </tr>
+        </tbody>
         </table>
       </div
       </div>
