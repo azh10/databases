@@ -32,11 +32,23 @@
       </div>
         <table class="comments">
             <thead ng-if="rso.comments">
-            <tr><th>Comments</th><th></th></tr>
+                <tr><th>Comments</th><th>author</th><th></th></tr>
             </thead>
-            <tr ng-repeat='comment in rso.comments'>
-                <td> {{comment.message}} </td>
-                <td><button ng-click='rso.del($index)'>DEL</button></td>
+            <tr>
+                <td><textarea placeholder="Comment" data-ng-model="rso.newcomment"></textarea></td>
+                <!--td><input type="text" placeholder="Comment" data-ng-model="rso.newcomment"></td-->
+                <td></td>
+                <td><button ng-click='rso.add()'>Add</button></td>
+            </tr>
+            <tr ng-repeat="comment in rso.comments | orderBy : 'id'">
+                <td ng-if="!comment.editing"> {{comment.message}} </td>
+                <td ng-if="comment.editing"> <textarea data-ng-model="comment.message"></textarea></td>
+                <td> {{comment.user.name}}</td>
+                <td> <span ng-hide="!rso.checkOwner(comment.user.id)">
+                    <button ng-click='rso.del($index, comment.id)'>DEL</button>
+                    <button ng-if="!comment.editing" ng-click='comment.editing = true'>EDIT</button>
+                    <button ng-if="comment.editing" ng-click='comment.editing = false; rso.edit($index)'>SAVE</button>
+                </span></td>
             </tr>
         </table>
     </div>
@@ -63,7 +75,6 @@
           </tr>
         </tbody>
         </table>
-      </div
       </div>
         <table>
             <tr>

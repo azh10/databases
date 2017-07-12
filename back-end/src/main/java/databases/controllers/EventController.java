@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 
 import static databases.util.ResponseUtil.respond;
 
@@ -78,8 +80,14 @@ public class EventController {
     }
 
     @PostMapping
-    public HttpEntity<?> create () {
-        return respond(HttpStatus.NOT_IMPLEMENTED);
+    public HttpEntity<?> create (
+            @PathParam("university") Optional<University> university,
+            @PathParam("rso") Optional<RSO> rso,
+            @PathParam("type") Optional<Boolean> type
+
+            ) {
+
+
     }
 
     @PostMapping("/{event}")

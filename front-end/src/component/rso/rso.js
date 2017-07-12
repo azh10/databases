@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var RsoController = function (RsoService, ConStore) {
+  var RsoController = function (RsoService, ConStore, $rootScope) {
     var self = this;
 
     this.join = function (rsoid) {
@@ -42,6 +42,25 @@
       self.shownPage = what;
     };
 
+    this.add = function(){
+      RsoService.createMessage(self.shownEvent.id, self.newcomment, $rootScope.credential.id).then(function (resp) {
+        self.comments.push(resp);
+        self.newcomment = "";
+      });
+    };
+    this.del = function(i, id){
+      RsoService.deleteMessage(self.shownEvent.id, id).then(function () {
+        self.comments.splice(i,1);
+      });
+    };
+    this.edit = function (i) {
+      RsoService.updateMessage(self.shownEvent.id, self.comments[i])
+    };
+
+    this.checkOwner = function (id) {
+      return $rootScope.credential.id === id;
+    };
+
     this.init = function () {
       self.getJoinedRSO();
       self.getOtherRSO();
@@ -70,6 +89,18 @@
 
     this.getMessages = function (id) {
       return WebService.doGetAll({url: 'event/messages/'+ id});
+    };
+
+    this.createMessage = function (id, message, user) {
+      return WebService.doPost({url: 'event/messages/'+ id, params: {message: message, user: user}});
+    };
+
+    this.updateMessage = function (id, message) {
+      return WebService.doPost({url: 'event/messages/'+ id + '/' + message.id, params: {message: message.message}});
+    };
+
+    this.deleteMessage = function (id, message) {
+      return WebService.doDelete({url: 'event/messages/'+ id + '/' + message});
     };
 
     this.getJoinedRSO = function () {
@@ -115,6 +146,7 @@
     .controller('RsoController', [
       'RsoService',
       'ConStore',
+      '$rootScope',
       RsoController
     ]);
 })();
