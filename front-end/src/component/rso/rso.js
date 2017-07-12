@@ -10,6 +10,10 @@
       });
     };
 
+    this.singleEvent = function(event){
+
+    };
+
     this.show = function (who, what) {
       RsoService.getEvents(who.id).then(function (resp) {
         console.log(resp);
@@ -34,7 +38,9 @@
         url: 'rso'
       });
     };
-
+    this.singleEvent = function (id){
+      return WebService.doGetAll({url: 'event/'+ id});
+    };
     this.getEvents = function (id) {
       return WebService.doGetAll({url: 'event/rso/'+ id});
     };
