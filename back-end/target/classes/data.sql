@@ -315,7 +315,10 @@ insert ignore into db_example.event_users (event_id, user_id) values
   ,(49,130), (47,140), (47,150), (47,160), (47,170);
 
 insert ignore into db_example.comment (message, event_id,user_id) values
-  ("THIS IS A TEST",1,1);
+  ("I wonder what prizes there are",1,500),("Ian, I heard that is was a Raspberry Pi!",1,284)
+  ,("Free Pizza? I'll be there!",1,22),("Harry, you don't need anymore pizza ;)",1,55)
+  ,("Should I bring multiple copies?",3,21),("Do we need our laptop?",3,31)
+  ,("Can someone email me the tips, I won't be able to make it",3,41),("Angela, I'll email you the tips!",3,61);
 
 
 

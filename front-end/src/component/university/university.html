@@ -25,7 +25,7 @@
                 <!--td><input type="text" placeholder="Comment" data-ng-model="university.newcomment"></td-->
                 <td><button ng-click='university.add()'>Add</button></td>
             </tr>
-            <tr ng-repeat='comment in university.comments'>
+            <tr ng-repeat="comment in university.comments | orderBy : 'id'">
                 <td> {{comment.message}} </td>
                 <td><button ng-click='university.del($index)'>DEL</button><button ng-click='console.log("TODO")'>EDIT</button></td>
             </tr>
