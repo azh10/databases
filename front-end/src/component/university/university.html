@@ -16,17 +16,18 @@
         <h2 style="text-align: center">{{university.shownEvent.title}}</h2>
         <p style="text-align: center; color: grey;">{{university.shownEvent.date | date : 'medium'}}</p>
         <p>{{university.shownEvent.about}}</p>
-        <table>
+        <table class="comments">
             <thead ng-if="university.comments">
                 <tr><th>Comments</th><th></th></tr>
             </thead>
             <tr>
-                <td><input type="text" placeholder="Comment" data-ng-model="university.newcomment"></td>
+                <td><textarea placeholder="Comment" data-ng-model="university.newcomment"></textarea></td>
+                <!--td><input type="text" placeholder="Comment" data-ng-model="university.newcomment"></td-->
                 <td><button ng-click='university.add()'>Add</button></td>
             </tr>
             <tr ng-repeat='comment in university.comments'>
                 <td> {{comment.message}} </td>
-                <td><button ng-click='university.del($index)'>DEL</button></td>
+                <td><button ng-click='university.del($index)'>DEL</button><button ng-click='console.log("TODO")'>EDIT</button></td>
             </tr>
         </table>
     </div>

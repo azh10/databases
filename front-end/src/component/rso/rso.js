@@ -30,7 +30,10 @@
 
     this.show = function (who, what, event) {
       if (self.eventlist)
-        self.shownEvent = event;
+        RsoService.getMessages(event.id).then(function (resp) {
+          self.shownEvent = event;
+          self.comments = resp;
+        });
       else
         RsoService.getEvents(who.id).then(function (resp) {
           self.eventlist = resp;
@@ -63,6 +66,10 @@
           leaverso: id
         }
       });
+    };
+
+    this.getMessages = function (id) {
+      return WebService.doGetAll({url: 'event/messages/'+ id});
     };
 
     this.getJoinedRSO = function () {

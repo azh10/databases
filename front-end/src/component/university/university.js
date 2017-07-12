@@ -25,7 +25,7 @@
     };
 
     this.add = function(){
-        self.comments.push(self.newcomment);
+        self.comments.push({message: self.newcomment});
         self.newcomment = "";
     };
     this.del = function(i){

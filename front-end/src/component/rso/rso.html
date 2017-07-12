@@ -14,12 +14,11 @@
         <h2 style="text-align: center">{{rso.shownEvent.title}}</h2>
         <p style="text-align: center; color: grey;">{{rso.shownEvent.date | date : 'medium'}}</p>
         <p>{{rso.shownEvent.about}}</p>
-        <comments></comments>
-        <table>
-            <thead ng-if="rso.shownEvent.comments">
+        <table class="comments">
+            <thead ng-if="rso.comments">
             <tr><th>Comments</th><th></th></tr>
             </thead>
-            <tr ng-repeat='comment in rso.shownEvent.comments'>
+            <tr ng-repeat='comment in rso.comments'>
                 <td> {{comment.message}} </td>
                 <td><button ng-click='rso.del($index)'>DEL</button></td>
             </tr>
