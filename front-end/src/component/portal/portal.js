@@ -105,7 +105,7 @@
         },{
           url: '/template',
           route: 'portal.template',
-          name: 'Settings',
+          name: 'Logout',
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
