@@ -13,8 +13,19 @@
         </div>
     </div>
     <div ng-switch-when="event">
-
+        <h2 style="text-align: center">{{university.shownEvent.title}}</h2>
+        <p style="text-align: center; color: grey;">{{university.shownEvent.date | date : 'medium'}}</p>
+        <p>{{university.shownEvent.about}}</p>
         <comments></comments>
+        <table>
+            <thead ng-if="university.shownEvent.comments">
+            <tr><th>Comments</th><th></th></tr>
+            </thead>
+            <tr ng-repeat='comment in university.shownEvent.comments'>
+                <td> {{comment.message}} </td>
+                <td><button ng-click='university.del($index)'>DEL</button></td>
+            </tr>
+        </table>
     </div>
     <div ng-switch-when="events" class="wrapper">
         <div id="singleRSO" class="main-content-uni">
@@ -60,7 +71,8 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr ng-repeat="event in university.eventlist">
+            <tr ng-repeat="event in university.eventlist"
+                data-ng-click="university.show(event, 'event', event)">
                 <td>{{event.title}}</td>
                 <td>{{event.rso.name||event.university.name}}</td>
                 <td>{{event.date | date : 'medium'}}</td>

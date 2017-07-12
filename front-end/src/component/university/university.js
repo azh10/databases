@@ -10,15 +10,19 @@
       });
     };
 
-    this.show = function (who, what) {
-      UniversityService.getEvents(who.id).then(function (resp) {
-        console.log(resp);
-        self.eventlist = resp;
-      });
+    this.show = function (who, what, event) {
+      if (self.eventlist) {
+        self.shownEvent = event;
+      } else {
+        UniversityService.getEvents(who.id).then(function (resp) {
+          console.log(resp);
+          self.eventlist = resp;
+        });
+      }
 
       self.shownUni = who;
       self.shownPage = what;
-      console.log(what, who);
+      console.log(what, who, event, "show");
     };
 
     this.init = function () {

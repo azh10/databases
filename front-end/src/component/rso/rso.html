@@ -11,7 +11,19 @@
     </div>
     <div ng-switch-when="event">
 
+        <h2 style="text-align: center">{{rso.shownEvent.title}}</h2>
+        <p style="text-align: center; color: grey;">{{rso.shownEvent.date | date : 'medium'}}</p>
+        <p>{{rso.shownEvent.about}}</p>
         <comments></comments>
+        <table>
+            <thead ng-if="rso.shownEvent.comments">
+            <tr><th>Comments</th><th></th></tr>
+            </thead>
+            <tr ng-repeat='comment in rso.shownEvent.comments'>
+                <td> {{comment.message}} </td>
+                <td><button ng-click='rso.del($index)'>DEL</button></td>
+            </tr>
+        </table>
     </div>
     <div ng-switch-when="events" class = "wrapper">
       <div id="singleRSO" class="main-content">
@@ -38,43 +50,58 @@
         <table>
             <tr>
                 <th>Title</th>
-                <th>Host</th>
                 <th>Time</th>
                 <th>Location</th>
                 <th>type</th>
             </tr>
             <tr>
                 <td><button style="color: dodgerblue" ng-click="rso.shownPage = 'create'">Create an event</button></td>
-                <td><button data-ng-click="rso.shownPage = 'event'">Join rso</button></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
-            <tr ng-repeat="event in rso.eventlist">
+            <tr ng-repeat="event in rso.eventlist"
+                data-ng-click="rso.show(event, 'event', event)">
                 <td>{{event.title}}</td>
-                <td>{{event.rso.name||event.university.name}}</td>
                 <td>{{event.date | date : 'medium'}}</td>
                 <td>{{event.location}}</td>
                 <td>{{(event.type==true)?'public':(event.type==null)?'RSO':'private'}}</td>
             </tr>
         </table>
     </div>
-    <table ng-switch-default>
-        <tr>
-            <th>Name</th>
-            <th>Contact Email</th>
-            <th>Admin Name</th>
-        </tr>
-        <tr>
-            <td><button style="color: dodgerblue" ng-click="portal.showModal = 'rso'">Request your group here</button></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr ng-repeat="org in rso.list"
-            data-ng-click="rso.show(org, 'events')">
-            <td>{{org.name}}</td>
-            <td>{{org.email}}</td>
-            <td>{{org.admin.user.name}}</td>
-        </tr>
-    </table>
+    <div ng-switch-default>
+        <h2 style="text-align: center">Your RSOs</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Contact Email</th>
+                <th>Admin Name</th>
+            </tr>
+            <tr ng-repeat="org in rso.list"
+                data-ng-click="rso.show(org, 'events', null)">
+                <td>{{org.name}}</td>
+                <td>{{org.email}}</td>
+                <td>{{org.admin.user.name}}</td>
+            </tr>
+        </table>
+        <h2 style="text-align: center">All RSOs</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Contact Email</th>
+                <th>Admin Name</th>
+            </tr>
+            <tr>
+                <td><button style="color: dodgerblue" ng-click="portal.showModal = 'rso'">Request your group here</button></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="org in rso.list"
+                data-ng-click="rso.show(org, 'events')">
+                <td>{{org.name}}</td>
+                <td>{{org.email}}</td>
+                <td>{{org.admin.user.name}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

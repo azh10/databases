@@ -96,7 +96,7 @@ public class UserController {
             @RequestParam(name = "user") User user,
             @RequestParam(name = "ismember") Boolean isMember
     ) {
-        Set<RSO> rsos = rsoRepository.findByUserAndIsMember(user, isMember);
+        //Set<RSO> rsos = rsoRepository.findByUserAndIsMember(user, isMember);
         return respond();
     }
 
