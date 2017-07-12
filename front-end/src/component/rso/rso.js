@@ -34,10 +34,10 @@
         url: 'rso'
       });
     };
-    
+
     this.getEvents = function (id) {
       return WebService.doGetAll({url: 'event/rso/'+ id});
-    }
+    };
   };
 
   angular

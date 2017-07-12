@@ -1,7 +1,5 @@
 <div id="rso-view" ng-switch="rso.shownPage">
-    {{rso.shownPage}}
     <div ng-switch-when="create">
-        {{rso.time}}
         <div class="form-group">
             <span class="error" ng-if="portal.newEvent.nameError">Required</span>
             <input id="rso-name" class="form-control title" type="text" placeholder="Title" ng-model="portal.newEvent.name">
@@ -15,8 +13,28 @@
 
         <comments></comments>
     </div>
-    <div ng-switch-when="events">
-        {{rso.shownRso}}
+    <div ng-switch-when="events" class = "wrapper">
+      <div id="singleRSO" class="main-content">
+        <h2>{{rso.shownRso.name}}</h2>
+        <h4 style="font-size:90%">Email : {{rso.shownRso.email}}</h4>
+        <h4 style="font-size:90%">Admin Name: {{rso.shownRso.admin.user.name}}</h4>
+        <h4 style="font-size:90%">Admin Email: {{rso.shownRso.admin.user.email}}</h4>
+        <br><br><h1 style="text-align:center">Events</h1>
+      </div>
+      <div class="aside">
+        <h1 id="rsoMembers">Members</h1>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          <tr ng-repeat="rso in rso.shownRso.users | orderBy :'name'">
+            <td>{{rso.name}}</td>
+            <td>{{rso.email}}</td>
+          </tr>
+        </table>
+      </div
+      </div>
         <table>
             <tr>
                 <th>Title</th>
