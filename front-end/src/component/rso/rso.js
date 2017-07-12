@@ -4,9 +4,27 @@
   var RsoController = function (RsoService, ConStore) {
     var self = this;
 
-    this.getAll = function () {
-      RsoService.getAll().then(function (response) {
-        self.list = response;
+    this.join = function (rsoid) {
+      RsoService.join(rsoid).then(function (response) {
+        self.getJoinedRSO();
+        self.getOtherRSO();
+      });
+    };
+    this.leave = function (rsoid) {
+      RsoService.leave(rsoid).then(function (response) {
+        self.getOtherRSO();
+        self.getJoinedRSO();
+      });
+    };
+
+    this.getJoinedRSO = function () {
+      RsoService.getJoinedRSO().then(function (response) {
+        self.joinedlist = response;
+      });
+    };
+    this.getOtherRSO = function () {
+      RsoService.getOtherRSO().then(function (response) {
+        self.otherlist = response;
       });
     };
 
@@ -26,16 +44,47 @@
     };
 
     this.init = function () {
-      this.getAll();
+      self.getJoinedRSO();
+      self.getOtherRSO();
     };
 
     this.init();
   };
 
-  var RsoService = function (WebService) {
-    this.getAll = function () {
+  var RsoService = function (WebService, $rootScope) {
+    this.join = function (id) {
+      console.log(id);
+      return WebService.doPost({
+        url: 'user/' + $rootScope.credential.id,
+        params: {
+          joinrso: id
+        }
+      });
+    };
+    this.leave = function (id) {
+      console.log(id);
+      return WebService.doPost({
+        url: 'user/' + $rootScope.credential.id,
+        params: {
+          leaverso: id
+        }
+      });
+    };
+
+    this.getJoinedRSO = function () {
       return WebService.doGetAll({
-        url: 'rso'
+        url: 'rso',
+        params: {
+          user: $rootScope.credential.id
+        }
+      });
+    };
+    this.getOtherRSO = function () {
+      return WebService.doGetAll({
+        url: 'rso/reversed',
+        params: {
+          user: $rootScope.credential.id
+        }
       });
     };
     this.singleEvent = function (id){
@@ -50,6 +99,7 @@
     .module('Databases')
     .service('RsoService', [
       'WebService',
+      '$rootScope',
       RsoService
     ])
     .config(['$stateProvider', function ($stateProvider) {

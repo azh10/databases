@@ -76,31 +76,34 @@
                 <th>Name</th>
                 <th>Contact Email</th>
                 <th>Admin Name</th>
+                <th></th>
             </tr>
-            <tr ng-repeat="org in rso.list"
-                data-ng-click="rso.show(org, 'events', null)">
-                <td>{{org.name}}</td>
-                <td>{{org.email}}</td>
-                <td>{{org.admin.user.name}}</td>
+            <tr ng-repeat="org in rso.joinedlist">
+                <td data-ng-click="rso.show(org, 'events', null)">{{org.name}}</td>
+                <td data-ng-click="rso.show(org, 'events', null)">{{org.email}}</td>
+                <td data-ng-click="rso.show(org, 'events', null)">{{org.admin.user.name}}</td>
+                <td><button data-ng-click="rso.leave(org.id)">Leave</button></td>
             </tr>
         </table>
-        <h2 style="text-align: center">All RSOs</h2>
+        <h2 style="text-align: center">Other RSOs</h2>
         <table>
             <tr>
                 <th>Name</th>
                 <th>Contact Email</th>
                 <th>Admin Name</th>
+                <th></th>
             </tr>
             <tr>
                 <td><button style="color: dodgerblue" ng-click="portal.showModal = 'rso'">Request your group here</button></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
-            <tr ng-repeat="org in rso.list"
-                data-ng-click="rso.show(org, 'events')">
+            <tr ng-repeat="org in rso.otherlist">
                 <td>{{org.name}}</td>
                 <td>{{org.email}}</td>
                 <td>{{org.admin.user.name}}</td>
+                <td><button data-ng-click="rso.join(org.id)">Join</button></td>
             </tr>
         </table>
     </div>

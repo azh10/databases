@@ -8,14 +8,14 @@ import databases.repositories.AdminRepository;
 import databases.repositories.RSORepository;
 import databases.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import static databases.util.ResponseUtil.respond;
 
@@ -36,8 +36,27 @@ public class RSOController {
     AdminRepository adminRepository;
 
     @GetMapping
-    public HttpEntity<?> allRSO () {
-        return respond(rsoRepository.findAll());
+    public HttpEntity<?> allRSO (
+            @RequestParam(name = "user") User user
+    ) {
+        Set<RSO> joinedRSOs = new HashSet<>();
+        for (RSO rso : rsoRepository.findAll())
+            if (rso.hasMember(user) && rso.getAdmin().getUser().getUni_id() == user.getUni_id())
+                joinedRSOs.add(rso);
+
+        return respond(joinedRSOs);
+    }
+
+    @GetMapping("/reversed")
+    public HttpEntity<?> allRSOReversed (
+            @RequestParam(name = "user") User user
+    ) {
+        Set<RSO> notJoinedRSOs = new HashSet<>();
+        for (RSO rso : rsoRepository.findAll())
+            if (rso.getAdmin().getUser().getUni_id() == user.getUni_id() && !rso.hasMember(user))
+                notJoinedRSOs.add(rso);
+
+        return respond(notJoinedRSOs);
     }
 
     @PostMapping

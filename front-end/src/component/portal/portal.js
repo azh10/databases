@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var PortalController = function (PortalService, ConStore) {
+  var PortalController = function (PortalService, ConStore, $rootScope) {
     var self = this;
 
     this.getAbout = function () {
@@ -102,7 +102,7 @@
           template: 'component/template/template.html'
         }];
       self.feVersion = ConStore.version;
-      self.credential = true;
+      $rootScope.credential = self.credential = {id: 1, name: "Felicity", email: "Felicity.Pullman@knights.ucf.edu", password: null, uni_id: 1};
     };
 
     this.init();
@@ -160,6 +160,7 @@
     .module('Databases')
     .service('PortalService', [
       'WebService',
+      '$rootScope',
       PortalService
     ])
     .config(['$stateProvider', function ($stateProvider) {
@@ -174,6 +175,7 @@
     .controller('PortalController', [
       'PortalService',
       'ConStore',
+      '$rootScope',
       PortalController
     ]);
 })();

@@ -34,6 +34,10 @@ public class RSO {
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> users;
 
+    public boolean hasMember (User user) {
+        return users.contains(user);
+    }
+
     public RSO addUser (User user) {
         if (this.users == null) {
             this.users = new HashSet<User>(){{ add(user); }};
