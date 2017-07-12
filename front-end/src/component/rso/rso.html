@@ -9,11 +9,27 @@
             <br/>
         </div>
     </div>
-    <div ng-switch-when="event">
-
+    <div ng-switch-when="event" class = "rso-single-event">
+      <div class="main-content-event">
         <h2 style="text-align: center">{{rso.shownEvent.title}}</h2>
-        <p style="text-align: center; color: grey;">{{rso.shownEvent.date | date : 'medium'}}</p>
-        <p>{{rso.shownEvent.about}}</p>
+        <p style="text-align: center;">{{rso.shownEvent.date | date : 'medium'}}</p>
+        <p style="text-align: center">{{rso.shownEvent.about}}</p>
+      </div>
+      <div class="aside-event">
+          <h1 style="text-align: center">Attendees</h1>
+          <table>
+            <tbody style="display: block;max-width: 400px; overflow-y: scroll;">
+              <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+              </tr>
+              <tr ng-repeat="rso in rso.shownEvent.users | orderBy :'name'">
+                  <td>{{rso.name}}</td>
+                  <td>{{rso.email}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
         <table class="comments">
             <thead ng-if="rso.comments">
             <tr><th>Comments</th><th></th></tr>
@@ -33,7 +49,7 @@
         <br><br><h1 style="text-align:center">Events</h1>
       </div>
       <div class="aside">
-        <h1 style="max-width: 400px" id="rsoMembers">Members</h1>
+        <h1 style="" id="rsoMembers">Members</h1>
         <table>
           <tbody style="display: block;max-width: 400px; height: 205px; overflow-y: scroll;">
           <tr>
